@@ -1,0 +1,8 @@
+{
+    "deno.enable": true,
+    "deno.lint": true,
+    "editor.defaultFormatter": "denoland.vscode-deno",
+    "cSpell.language": "en,sv",
+    "cSpell.words": ["nunito", "Rosse"],
+    "deno.unstable": true
+}
