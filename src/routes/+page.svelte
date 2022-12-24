@@ -6,7 +6,7 @@
 
 <div class="overflow-hidden font-nunito">
 	<div
-		class="relative py-56 md:py-72 md:w-[95vw] mx-auto md:my-16 mx-auto flex flex-col justify-center bg-si-red bg-opacity-10 overflow-hidden md:rounded-3xl"
+		class="relative py-56 md:py-72 md:w-[95vw] mx-auto md:my-16 flex flex-col justify-center bg-si-red bg-opacity-10 overflow-hidden md:rounded-3xl"
 	>
 		<div
 			class="absolute bottom-0 md:bottom-auto md:top-0 w-full bg-si-red text-white text-lg flex justify-center text-center py-3"
@@ -71,7 +71,7 @@
 	</div>
 
 	<div
-		class="relative w-[95vw] mx-auto my-16 mx-auto flex justify-center bg-black text-white overflow-hidden rounded-3xl"
+		class="relative w-[95vw] mx-auto my-16 flex justify-center bg-black text-white overflow-hidden rounded-3xl"
 	>
 		<div
 			class="container py-12 flex flex-col lg:flex-row justify-between items-baseline lg:items-center gap-8"
