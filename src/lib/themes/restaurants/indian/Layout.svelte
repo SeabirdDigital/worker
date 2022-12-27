@@ -1,4 +1,6 @@
 <script>
+	import './IndianRestaurant.css';
+
 	import { onMount } from 'svelte';
 
 	onMount(() => {

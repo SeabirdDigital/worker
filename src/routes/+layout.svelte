@@ -1,6 +1,4 @@
 <script lang="ts">
-	import '../app.css';
-
 	import site, { type Site } from '$lib/stores/site';
 	import themes from '$lib/themes';
 	import theme from '$lib/stores/theme';
