@@ -1,4 +1,5 @@
 import { ModernRestaurant } from './restaurants/modern';
+import { IndianRestaurant } from './restaurants/indian';
 
 export type Theme = {
 	Layout: ConstructorOfATypedSvelteComponent;
@@ -9,7 +10,8 @@ export type Theme = {
 };
 
 const themes: { [id: string]: Theme } = {
-	ModernRestaurant
+	ModernRestaurant,
+	IndianRestaurant
 };
 
 export default themes;
