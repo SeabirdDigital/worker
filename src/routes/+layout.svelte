@@ -21,7 +21,8 @@
 
 	onMount(() => {
 		window.addEventListener('message', (e) => {
-			if (e.data.cmd == 'editable') {
+			if (e.data == 'editable') {
+				console.log("Is now editable")
 				const editables = document.querySelectorAll('div');
 				editables.forEach((element) => {
 					element.contentEditable = 'true';
