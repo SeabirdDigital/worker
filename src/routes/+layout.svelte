@@ -6,6 +6,7 @@
 	import theme from '$lib/stores/theme';
 	import pageId from '$lib/stores/pageId';
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 
 	export let data;
 	const currentSite: Site = data.currentSite;
@@ -17,6 +18,17 @@
 	pageId.set(pathname == '/' ? 'home' : pathname.substring(1));
 
 	const Layout = $theme.Layout;
+
+	onMount(() => {
+		window.addEventListener('message', (e) => {
+			if (e.data.cmd == 'editable') {
+				const editables = document.querySelectorAll('div');
+				editables.forEach((element) => {
+					element.contentEditable = 'true';
+				});
+			}
+		});
+	});
 </script>
 
 <svelte:head>
