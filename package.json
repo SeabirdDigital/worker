@@ -33,6 +33,7 @@
 	"type": "module",
 	"dependencies": {
 		"firebase": "^9.15.0",
-		"firebase-admin": "^11.4.1"
+		"firebase-admin": "^11.4.1",
+		"svelte-scrolling": "^1.2.2"
 	}
 }
