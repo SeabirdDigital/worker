@@ -8,7 +8,7 @@
 
 <div class="overflow-hidden font-nunito">
 	<div
-		class="relative py-56 md:py-72 md:w-[95vw] mx-auto md:my-16 flex flex-col justify-center bg-si-red bg-opacity-10 overflow-hidden md:rounded-3xl"
+		class="relative py-56 md:py-72 md:w-[95vw] mx-auto mt-8 lg:mt-16 flex flex-col justify-center bg-si-red bg-opacity-10 overflow-hidden md:rounded-3xl"
 	>
 		<div
 			class="absolute bottom-0 md:bottom-auto md:top-0 w-full bg-si-red text-white text-lg flex justify-center text-center py-3"
@@ -37,8 +37,8 @@
 			</div>
 
 			<div class="flex gap-3">
-				<Button class="bg-si-red border-si-red text-white">Se menyn</Button>
-				<Button class="border-black">Hitta hit</Button>
+				<Button href="#menu" class="bg-si-red border-si-red text-white">Se menyn</Button>
+				<Button href="#" class="border-black">Hitta hit</Button>
 			</div>
 		</div>
 	</div>
@@ -89,7 +89,7 @@
 			</div>
 
 			<div class="flex flex-col sm:flex-row gap-2 sm:gap-6">
-				<Button class="border-white gap-3">
+				<Button href="#" class="border-white gap-3">
 					<svg width="18" height="18" viewBox="0 0 36 36">
 						<path
 							fill="currentColor"
@@ -100,7 +100,7 @@
 					(1)23-456 78 90
 				</Button>
 				<div>
-					<Button class="bg-white text-black gap-4">
+					<Button href="#" class="bg-white text-black gap-4">
 						Foodora
 						<svg class="rotate-90" width="18" height="18" viewBox="0 0 36 36">
 							<path
@@ -115,7 +115,7 @@
 		</div>
 	</div>
 
-	<div class="container py-24">
+	<div id="menu" class="container py-24">
 		<h2 class="font-lora text-5xl font-semibold mb-2.5">
 			<Text id="menuHeading" />
 		</h2>
