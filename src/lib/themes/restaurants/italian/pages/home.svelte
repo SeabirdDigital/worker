@@ -8,7 +8,7 @@
 
 <div class="h-screen w-full flex flex-col">
 	<div class="h-[15%] flex">
-		<div class="h-full w-[15%] bg-si-red flex justify-center items-center">
+		<div class="h-full w-[15vw] bg-si-brown flex justify-center items-center">
 			<img class="w-[60%]" src="/si/logo.png" alt="s" />
 		</div>
 
@@ -23,18 +23,18 @@
 	</div>
 
 	<div class="flex flex-grow">
-		<div class="w-[15%] flex items-end justify-center pb-12">
+		<div class="w-[15vw] flex items-end justify-center pb-12">
 			<img src={ArrowDown} alt="" />
 		</div>
 
 		<div class="flex flex-grow">
-			<div class="w-1/2 h-full bg-cover" style="background-image: url(/si/hero.png);" />
+			<div class="flex-grow h-full bg-cover" style="background-image: url(/si/hero.png);" />
 
-			<div class="h-full flex flex-col gap-2 justify-center px-12">
+			<div class="w-1/2 h-full flex flex-col gap-2 justify-center px-12">
 				<h1 class="text-4xl md:text-4xl 2xl:text-5xl font-lora">
 					<Text id="heroHeading" />
 				</h1>
-				<p>
+				<p class="w-96">
 					<Text id="heroText" />
 				</p>
 			</div>
@@ -58,7 +58,7 @@
 </div>
 
 <div class="flex">
-	<div id="stars" class="w-[15%] flex flex-col items-center py-16">
+	<div id="stars" class="w-[15vw] flex flex-col items-center py-16">
 		<img src={Star} alt="" />
 		<img src={Star} alt="" />
 		<img src={Star} alt="" />
@@ -144,8 +144,47 @@
 			</a>
 		</div>
 	</div>
-	<div class="w-[15%]" />
+	<div class="w-[15vw]" />
 </div>
+
+<footer class="text-sm">
+	<div class="mt-24 container">
+		<div class="border-y py-16 grid grid-cols-3">
+			<img class="w-36" src="/si/logo.svg" alt="" />
+
+			<div class="col-span-2 flex relative">
+				<div class="w-1/2 px-4 flex flex-col gap-2">
+					<h3 class="text-lg font-lora font-semibold">Öppetider</h3>
+					<div class="flex justify-between">
+						<span>Måndag till Lördag</span>
+						<span>11:00 - 22:30</span>
+					</div>
+
+					<div class="flex justify-between">
+						<span>Söndag</span>
+						<span>11:00 - 22:00</span>
+					</div>
+				</div>
+				<div class="w-1/2 px-4 flex flex-col gap-2">
+					<h3 class="text-lg font-lora font-semibold">Hör av dig!</h3>
+					<div class="flex justify-between">
+						<span>Email</span>
+						<span>ciao@soloitaliano.se</span>
+					</div>
+
+					<div class="flex justify-between">
+						<span>Telefon</span>
+						<span>+46 (0)40-23 45 88</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="text-center py-8">
+		Copyright 2023 &copy; Seabird Digital UD. Alla rättigheter förbehållna.
+	</div>
+</footer>
 
 <style lang="postcss">
 	#stars > img {
