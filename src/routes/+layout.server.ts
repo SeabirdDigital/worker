@@ -1,5 +1,5 @@
-import type { LayoutServerLoad } from './$types';
 import { getFirestore } from 'firebase-admin/firestore';
+import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async (data) => {
 	const host = new URL(data.request.url).host;
@@ -12,7 +12,6 @@ export const load: LayoutServerLoad = async (data) => {
 	for (const s of sites) {
 		const site = await s.get();
 		const hosts = site.get('siteData.hosts') as string[] | undefined;
-		console.log(site.data());
 
 		if (hosts)
 			for (const h of hosts) {

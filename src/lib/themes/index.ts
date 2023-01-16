@@ -1,5 +1,6 @@
-import { ModernRestaurant } from './restaurants/modern';
 import { IndianRestaurant } from './restaurants/indian';
+import { ItalianRestaurant } from './restaurants/italian';
+import { ModernRestaurant } from './restaurants/modern';
 
 export type Theme = {
 	Layout: ConstructorOfATypedSvelteComponent;
@@ -11,7 +12,8 @@ export type Theme = {
 
 const themes: { [id: string]: Theme } = {
 	ModernRestaurant,
-	IndianRestaurant
+	IndianRestaurant,
+	ItalianRestaurant
 };
 
 export default themes;
