@@ -4,7 +4,7 @@
 	import ChevronRight from '../components/icons/ChevronRight.svg';
 </script>
 
-<div class="h-screen w-screen flex flex-col">
+<div class="h-screen w-full flex flex-col">
 	<div class="h-[15%] flex">
 		<div class="h-full w-[15%] bg-si-red flex justify-center items-center">
 			<img class="w-[60%]" src="/si/logo.png" alt="s" />
@@ -37,5 +37,20 @@
 				</p>
 			</div>
 		</div>
+	</div>
+</div>
+
+<div class="flex h-[85vh]">
+	<div class="ml-[15%] flex flex-grow">
+		<div class="h-full w-1/2 flex flex-col gap-2 justify-center px-20">
+			<h1 class="text-4xl md:text-4xl 2xl:text-5xl font-lora">
+				<Text id="aboutHeading" />
+			</h1>
+			<p>
+				<Text id="aboutText" />
+			</p>
+		</div>
+
+		<div class="w-1/2 h-full bg-cover" style="background-image: url(/si/about.jpg);" />
 	</div>
 </div>
