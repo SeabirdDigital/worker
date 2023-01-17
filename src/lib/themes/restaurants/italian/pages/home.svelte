@@ -8,33 +8,39 @@
 
 <div class="h-screen w-full flex flex-col">
 	<div class="h-[15%] flex">
-		<div class="h-full w-[15vw] bg-si-brown flex justify-center items-center">
+		<div class="h-full w-[15vw] min-w-[96px] bg-si-brown flex justify-center items-center">
 			<img class="w-[60%]" src="/si/logo.png" alt="s" />
 		</div>
 
 		<div class="flex flex-grow border-b">
 			<div class="flex-grow" />
 
-			<div class="flex items-center px-8 text-gray-800">Norregatan 15,<br />211 27 Malmö</div>
+			<div class="flex items-center px-8 text-gray-800 whitespace-nowrap">
+				Norregatan 15,<br />211 27 Malmö
+			</div>
 			<div class="border-l bg-gray-50 text-gray-800 h-full px-8 flex items-center">
-				+46 (0)40-23 45 88 <img class="h-6" src={ChevronRight} alt="" />
+				<span class="block sm:hidden">Ring</span>
+				<span class="hidden sm:block"> +46 (0)40-23 45 88 </span>
+				<img class="h-6" src={ChevronRight} alt="" />
 			</div>
 		</div>
 	</div>
 
 	<div class="flex flex-grow">
-		<div class="w-[15vw] flex items-end justify-center pb-12">
+		<div class="hidden w-[15vw] md:flex items-end justify-center pb-12">
 			<img src={ArrowDown} alt="" />
 		</div>
 
-		<div class="flex flex-grow">
+		<div class="flex flex-col sm:flex-row flex-grow">
 			<div class="flex-grow h-full bg-cover" style="background-image: url(/si/hero.png);" />
 
-			<div class="w-1/2 h-full flex flex-col gap-2 justify-center px-12">
-				<h1 class="text-4xl md:text-4xl 2xl:text-5xl font-lora">
+			<div
+				class="sm:w-1/2 h-full flex flex-col gap-2 justify-center items-center sm:items-start text-center sm:text-left px-12"
+			>
+				<h1 class="text-3xl md:text-4xl 2xl:text-5xl font-lora">
 					<Text id="heroHeading" />
 				</h1>
-				<p class="w-96">
+				<p class="max-w-xs">
 					<Text id="heroText" />
 				</p>
 			</div>
@@ -43,9 +49,11 @@
 </div>
 
 <div class="flex h-[85vh]">
-	<div class="ml-[15%] flex flex-grow">
-		<div class="h-full w-1/2 flex flex-col gap-2 justify-center px-20">
-			<h2 class="text-4xl md:text-4xl 2xl:text-5xl font-lora">
+	<div class="md:ml-[15%] flex flex-col-reverse md:flex-row flex-grow">
+		<div
+			class="h-full md:w-1/2 flex flex-col gap-2 justify-center items-center sm:items-start text-center sm:text-left px-12"
+		>
+			<h2 class="text-3xl md:text-4xl 2xl:text-5xl font-lora">
 				<Text id="aboutHeading" />
 			</h2>
 			<p>
@@ -53,26 +61,26 @@
 			</p>
 		</div>
 
-		<div class="w-1/2 h-full bg-cover" style="background-image: url(/si/about.jpg);" />
+		<div class="flex-grow h-full bg-cover" style="background-image: url(/si/about.jpg);" />
 	</div>
 </div>
 
 <div class="flex">
-	<div id="stars" class="w-[15vw] flex flex-col items-center py-16">
+	<div id="stars" class="hidden w-[15vw] md:flex flex-col items-center">
 		<img src={Star} alt="" />
 		<img src={Star} alt="" />
 		<img src={Star} alt="" />
 		<img src={Star} alt="" />
 	</div>
 
-	<div class="flex flex-col items-center justify-center flex-grow gap-8">
+	<div class="flex flex-col items-center justify-center flex-grow gap-8 py-24">
 		<div class="relative">
 			<img class="-z-10 absolute -top-12 -left-16 h-36" src={Quote} alt="" />
 
 			<h2 class="text-4xl md:text-4xl 2xl:text-5xl font-lora">Recensioner</h2>
 		</div>
 
-		<div class="flex text-sm text-center container" id="reviews">
+		<div class="sm:flex text-sm text-center container" id="reviews">
 			<div>
 				<p>
 					Mycket god pizza och servicen var mycket bra.
@@ -101,7 +109,7 @@
 
 <div class="flex">
 	<div
-		class="flex justify-between flex-grow pl-[15%] px-8 py-12 bg-cover text-white"
+		class="flex flex-col lg:flex-row gap-4 justify-between flex-grow pl-[15%] px-8 py-12 bg-cover text-white"
 		style="background-image: url(/si/italia.jpg);"
 	>
 		<div>
@@ -113,7 +121,7 @@
 			</p>
 		</div>
 
-		<div class="flex flex-col sm:flex-row gap-3 sm:gap-6">
+		<div class="flex flex-col-reverse sm:flex-row gap-3 sm:gap-6">
 			<a href="tel:+4640234588">
 				<button
 					class="flex items-center h-full p-4 text-xl leading-none border-2 border-white gap-3"
@@ -144,17 +152,19 @@
 			</a>
 		</div>
 	</div>
-	<div class="w-[15vw]" />
+	<div class="sm:w-[15vw]" />
 </div>
 
 <footer class="text-sm">
 	<div class="mt-24 container">
-		<div class="border-y py-16 grid grid-cols-3">
-			<img class="w-36" src="/si/logo.svg" alt="" />
+		<div class="relative border-y py-16 flex flex-col gap-8 md:gap-0 md:grid md:grid-cols-3">
+			<div class="w-full flex justify-center md:justify-start">
+				<img class="w-36" src="/si/logo.svg" alt="" />
+			</div>
 
-			<div class="col-span-2 flex relative">
-				<div class="w-1/2 px-4 flex flex-col gap-2">
-					<h3 class="text-lg font-lora font-semibold">Öppetider</h3>
+			<div class="col-span-2 flex flex-col md:flex-row relative">
+				<div class="md:w-1/2 px-4 flex flex-col gap-2">
+					<h3 class="text-lg font-lora font-semibold">Öppettider</h3>
 					<div class="flex justify-between">
 						<span>Måndag till Lördag</span>
 						<span>11:00 - 22:30</span>
@@ -165,7 +175,7 @@
 						<span>11:00 - 22:00</span>
 					</div>
 				</div>
-				<div class="w-1/2 px-4 flex flex-col gap-2">
+				<div class="md:w-1/2 px-4 flex flex-col gap-2">
 					<h3 class="text-lg font-lora font-semibold">Hör av dig!</h3>
 					<div class="flex justify-between">
 						<span>Email</span>
@@ -192,7 +202,7 @@
 	}
 
 	#reviews > div {
-		@apply px-8 flex flex-col gap-4;
+		@apply px-8 py-6 flex flex-col gap-4;
 	}
 
 	#reviews span {
