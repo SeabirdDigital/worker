@@ -25,6 +25,9 @@ export type Site = {
 			phone?: string;
 			email?: string;
 		};
+		colors?: {
+			[key: string]: string;
+		};
 		openingHours?: {
 			weekday: string;
 			time: string;

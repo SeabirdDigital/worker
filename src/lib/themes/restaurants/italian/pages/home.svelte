@@ -19,7 +19,10 @@
 
 <div class="h-screen w-full flex flex-col">
 	<div class="h-[15%] flex">
-		<div class="h-full w-[15vw] min-w-[96px] bg-si-brown flex justify-center items-center">
+		<div
+			class="h-full w-[15vw] min-w-[96px] flex justify-center items-center"
+			style="background-color: {$site.data?.colors?.['primary']};"
+		>
 			<img class="w-[60%]" src={globalImages?.logo} alt="Logo" />
 		</div>
 
