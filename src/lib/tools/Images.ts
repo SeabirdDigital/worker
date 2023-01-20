@@ -1,8 +1,8 @@
 import type { Site } from '$lib/stores/site';
-import { storage } from 'firebase-admin';
+import admin from 'firebase-admin';
 
 export const getPageImages = async (site: Site, pageId: string | undefined = undefined) => {
-	const bucket = storage().bucket('gs://seabirdportal.appspot.com');
+	const bucket = admin.storage().bucket('gs://seabirdportal.appspot.com');
 	const imageFiles = pageId ? site.pages[pageId]?.images : site.data?.images;
 
 	const images: { [filename: string]: string } = {};
