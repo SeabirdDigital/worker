@@ -1,9 +1,12 @@
 <script>
+	import ContactText from '$lib/components/ContactText.svelte';
 	import Text from '$lib/components/Text.svelte';
 	import ArrowDown from '../components/icons/ArrowDown.svg';
 	import ChevronRight from '../components/icons/ChevronRight.svg';
 	import Quote from '../components/icons/Quote.svg';
 	import Star from '../components/icons/Star.svg';
+
+	import site from '$lib/stores/site';
 </script>
 
 <div class="h-screen w-full flex flex-col">
@@ -15,14 +18,20 @@
 		<div class="flex flex-grow border-b">
 			<div class="flex-grow" />
 
-			<div class="flex items-center px-8 text-gray-800 whitespace-nowrap">
-				Norregatan 15,<br />211 27 Malmö
-			</div>
-			<div class="border-l bg-gray-50 text-gray-800 h-full px-8 flex items-center">
+			<a
+				href="https://goo.gl/maps/xnrVdnmWMLTrbrxa7"
+				class="flex items-center px-8 text-gray-800 whitespace-nowrap"
+			>
+				<ContactText type="address" />
+			</a>
+			<a
+				href={'tel:' + $site.siteData.contact.phone.replace(/\s/g, '')}
+				class="border-l bg-gray-50 text-gray-800 h-full px-8 flex items-center"
+			>
 				<span class="block sm:hidden">Ring</span>
-				<span class="hidden sm:block"> +46 (0)40-23 45 88 </span>
+				<span class="hidden sm:block"><ContactText type="phone" /> </span>
 				<img class="h-6" src={ChevronRight} alt="" />
-			</div>
+			</a>
 		</div>
 	</div>
 
@@ -77,32 +86,20 @@
 		<div class="relative">
 			<img class="-z-10 absolute -top-12 -left-16 h-36" src={Quote} alt="" />
 
-			<h2 class="text-4xl md:text-4xl 2xl:text-5xl font-lora">Recensioner</h2>
+			<h2 class="text-4xl md:text-4xl 2xl:text-5xl font-lora">
+				<Text id="reviewsHeading" />
+			</h2>
 		</div>
 
 		<div class="sm:flex text-sm text-center container" id="reviews">
-			<div>
-				<p>
-					Mycket god pizza och servicen var mycket bra.
-					<b>Kocken vet hur man gör riktig italiensk pizza.</b>
-					Tack för pizzan.
-				</p>
-				<span>Mubinul Mulk</span>
-			</div>
-			<div>
-				<p>
-					<b>Bästa pizzan i Malmö. Hands down.</b> Alla ingredienser är färska och alla rätt (som jag
-					smakat) klassar alla andra pizzerior jag har käkat på!
-				</p>
-				<span>Victor Schack</span>
-			</div>
-			<div>
-				<p>
-					Fantastisk pizza. Nya ägaren levererar. <b>En slice räckte</b> för att jag skulle skriva en
-					recension. Vi ses igen.
-				</p>
-				<span>Linus Persson</span>
-			</div>
+			{#each $site.data.reviews as review}
+				<div>
+					<p>
+						{@html review.message}
+					</p>
+					<span>{review.author}</span>
+				</div>
+			{/each}
 		</div>
 	</div>
 </div>
@@ -122,7 +119,7 @@
 		</div>
 
 		<div class="flex flex-col-reverse sm:flex-row gap-3 sm:gap-6">
-			<a href="tel:+4640234588">
+			<a href={'tel:' + $site.siteData.contact.phone.replace(/\s/g, '')}>
 				<button
 					class="flex items-center h-full p-4 text-xl leading-none border-2 border-white gap-3"
 				>
@@ -133,7 +130,7 @@
 						/>
 						<path fill="none" d="M0 0h36v36H0z" />
 					</svg>
-					(0)40-23 45 88
+					<ContactText type="phone" />
 				</button>
 			</a>
 			<a href="https://www.foodora.se/restaurant/p4ht/solo-pizza">
@@ -165,26 +162,25 @@
 			<div class="col-span-2 flex flex-col md:flex-row relative">
 				<div class="md:w-1/2 px-4 flex flex-col gap-2">
 					<h3 class="text-lg font-lora font-semibold">Öppettider</h3>
-					<div class="flex justify-between">
-						<span>Måndag till Lördag</span>
-						<span>11:00 - 22:30</span>
-					</div>
-
-					<div class="flex justify-between">
-						<span>Söndag</span>
-						<span>11:00 - 22:00</span>
-					</div>
+					{#each $site.data.openingHours as day}
+						<div class="flex justify-between">
+							<span>{day.weekday}</span>
+							<span>{day.time}</span>
+						</div>
+					{/each}
 				</div>
 				<div class="md:w-1/2 px-4 flex flex-col gap-2">
 					<h3 class="text-lg font-lora font-semibold">Hör av dig!</h3>
 					<div class="flex justify-between">
 						<span>Email</span>
-						<span>ciao@soloitaliano.se</span>
+						<a href={'mailto:' + $site.siteData.contact.email}><ContactText type="email" /></a>
 					</div>
 
 					<div class="flex justify-between">
 						<span>Telefon</span>
-						<span>+46 (0)40-23 45 88</span>
+						<a href={'tel:' + $site.siteData.contact.phone.replace(/\s/g, '')}
+							><ContactText type="phone" /></a
+						>
 					</div>
 				</div>
 			</div>

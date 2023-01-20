@@ -15,7 +15,6 @@ export const load: LayoutServerLoad = async (data) => {
 
 		if (hosts)
 			for (const h of hosts) {
-				console.log(import.meta.env.VITE_HOST);
 				if (h == (import.meta.env.VITE_HOST ?? host)) {
 					currentSite = site.data();
 					break;

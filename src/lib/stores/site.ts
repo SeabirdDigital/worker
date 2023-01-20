@@ -5,6 +5,16 @@ export type Site = {
 	pages: {
 		[pageId: string]: { [objectId: string]: string };
 	};
+	data: {
+		openingHours: {
+			weekday: string;
+			time: string;
+		}[];
+		reviews: {
+			author: string;
+			message: string;
+		}[];
+	};
 };
 
 export type SiteData = {
@@ -12,6 +22,11 @@ export type SiteData = {
 	tagline: string;
 	hosts: string[];
 	theme: string;
+	contact: {
+		address: string;
+		phone: string;
+		email: string;
+	};
 };
 
 const site = writable<Site>();
