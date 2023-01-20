@@ -1,4 +1,6 @@
 <script>
+	import { scrollRef, scrollTo, scrollTop } from 'svelte-scrolling';
+
 	import ContactText from '$lib/components/ContactText.svelte';
 	import Text from '$lib/components/Text.svelte';
 	import ArrowDown from '../components/icons/ArrowDown.svg';
@@ -6,13 +8,19 @@
 	import Quote from '../components/icons/Quote.svg';
 	import Star from '../components/icons/Star.svg';
 
+	import pageId from '$lib/stores/pageId';
 	import site from '$lib/stores/site';
+
+	const images = $site.pages[$pageId].images;
+	const globalImages = $site.data?.images;
+
+	console.log($site.data?.contact?.phone);
 </script>
 
 <div class="h-screen w-full flex flex-col">
 	<div class="h-[15%] flex">
 		<div class="h-full w-[15vw] min-w-[96px] bg-si-brown flex justify-center items-center">
-			<img class="w-[60%]" src="/si/logo.png" alt="s" />
+			<img class="w-[60%]" src={globalImages?.logo} alt="Logo" />
 		</div>
 
 		<div class="flex flex-grow border-b">
@@ -25,7 +33,7 @@
 				<ContactText type="address" />
 			</a>
 			<a
-				href={'tel:' + $site.siteData.contact.phone.replace(/\s/g, '')}
+				href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}
 				class="border-l bg-gray-50 text-gray-800 h-full px-8 flex items-center"
 			>
 				<span class="block sm:hidden">Ring</span>
@@ -36,12 +44,12 @@
 	</div>
 
 	<div class="flex flex-grow">
-		<div class="hidden w-[15vw] md:flex items-end justify-center pb-12">
+		<div use:scrollTo={'about'} class="hidden w-[15vw] md:flex items-end justify-center pb-12">
 			<img src={ArrowDown} alt="" />
 		</div>
 
 		<div class="flex flex-col sm:flex-row flex-grow">
-			<div class="flex-grow h-full bg-cover" style="background-image: url(/si/hero.png);" />
+			<div class="flex-grow h-full bg-cover" style="background-image: url({images?.hero});" />
 
 			<div
 				class="sm:w-1/2 h-full flex flex-col gap-2 justify-center items-center sm:items-start text-center sm:text-left px-12"
@@ -57,7 +65,7 @@
 	</div>
 </div>
 
-<div class="flex h-[85vh]">
+<div use:scrollRef={'about'} class="flex h-[85vh]">
 	<div class="md:ml-[15%] flex flex-col-reverse md:flex-row flex-grow">
 		<div
 			class="h-full md:w-1/2 flex flex-col gap-2 justify-center items-center sm:items-start text-center sm:text-left px-12"
@@ -70,7 +78,7 @@
 			</p>
 		</div>
 
-		<div class="flex-grow h-full bg-cover" style="background-image: url(/si/about.jpg);" />
+		<div class="flex-grow h-full bg-cover" style="background-image: url({images?.about});" />
 	</div>
 </div>
 
@@ -92,14 +100,16 @@
 		</div>
 
 		<div class="sm:flex text-sm text-center container" id="reviews">
-			{#each $site.data.reviews as review}
-				<div>
-					<p>
-						{@html review.message}
-					</p>
-					<span>{review.author}</span>
-				</div>
-			{/each}
+			{#if $site.data?.reviews}
+				{#each $site.data.reviews as review}
+					<div>
+						<p>
+							{@html review.message}
+						</p>
+						<span>{review.author}</span>
+					</div>
+				{/each}
+			{/if}
 		</div>
 	</div>
 </div>
@@ -107,7 +117,7 @@
 <div class="flex">
 	<div
 		class="flex flex-col lg:flex-row gap-4 justify-between flex-grow pl-[15%] px-8 py-12 bg-cover text-white"
-		style="background-image: url(/si/italia.jpg);"
+		style="background-image: url({images?.italia});"
 	>
 		<div>
 			<h2 class="text-4xl md:text-4xl 2xl:text-5xl font-lora">
@@ -119,7 +129,7 @@
 		</div>
 
 		<div class="flex flex-col-reverse sm:flex-row gap-3 sm:gap-6">
-			<a href={'tel:' + $site.siteData.contact.phone.replace(/\s/g, '')}>
+			<a href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}>
 				<button
 					class="flex items-center h-full p-4 text-xl leading-none border-2 border-white gap-3"
 				>
@@ -156,29 +166,31 @@
 	<div class="mt-24 container">
 		<div class="relative border-y py-16 flex flex-col gap-8 md:gap-0 md:grid md:grid-cols-3">
 			<div class="w-full flex justify-center md:justify-start">
-				<img class="w-36" src="/si/logo.svg" alt="" />
+				<img class="w-36" src={globalImages?.logoAlt} alt="" />
 			</div>
 
 			<div class="col-span-2 flex flex-col md:flex-row relative">
 				<div class="md:w-1/2 px-4 flex flex-col gap-2">
-					<h3 class="text-lg font-lora font-semibold">Öppettider</h3>
-					{#each $site.data.openingHours as day}
-						<div class="flex justify-between">
-							<span>{day.weekday}</span>
-							<span>{day.time}</span>
-						</div>
-					{/each}
+					{#if $site.data?.openingHours}
+						<h3 class="text-lg font-lora font-semibold">Öppettider</h3>
+						{#each $site.data.openingHours as day}
+							<div class="flex justify-between">
+								<span>{day.weekday}</span>
+								<span>{day.time}</span>
+							</div>
+						{/each}
+					{/if}
 				</div>
 				<div class="md:w-1/2 px-4 flex flex-col gap-2">
 					<h3 class="text-lg font-lora font-semibold">Hör av dig!</h3>
 					<div class="flex justify-between">
 						<span>Email</span>
-						<a href={'mailto:' + $site.siteData.contact.email}><ContactText type="email" /></a>
+						<a href={'mailto:' + $site.data?.contact?.email}><ContactText type="email" /></a>
 					</div>
 
 					<div class="flex justify-between">
 						<span>Telefon</span>
-						<a href={'tel:' + $site.siteData.contact.phone.replace(/\s/g, '')}
+						<a href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}
 							><ContactText type="phone" /></a
 						>
 					</div>

@@ -1,16 +1,35 @@
 import { writable } from 'svelte/store';
 
 export type Site = {
+	id: string;
 	siteData: SiteData;
 	pages: {
-		[pageId: string]: { [objectId: string]: string };
+		[pageId: string]: {
+			images?: {
+				[imageId: string]: string;
+			};
+			[objectId: string]:
+				| string
+				| {
+						[imageId: string]: string;
+				  }
+				| undefined;
+		};
 	};
-	data: {
-		openingHours: {
+	data?: {
+		images?: {
+			[imageId: string]: string;
+		};
+		contact?: {
+			address?: string;
+			phone?: string;
+			email?: string;
+		};
+		openingHours?: {
 			weekday: string;
 			time: string;
 		}[];
-		reviews: {
+		reviews?: {
 			author: string;
 			message: string;
 		}[];
@@ -22,11 +41,6 @@ export type SiteData = {
 	tagline: string;
 	hosts: string[];
 	theme: string;
-	contact: {
-		address: string;
-		phone: string;
-		email: string;
-	};
 };
 
 const site = writable<Site>();

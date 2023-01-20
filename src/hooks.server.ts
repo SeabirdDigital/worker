@@ -1,11 +1,11 @@
-import admin from 'firebase-admin';
 import {
-	SECRET_FIREBASE_PROJECT_ID,
 	SECRET_FIREBASE_CLIENT_EMAIL,
-	SECRET_FIREBASE_KEY
+	SECRET_FIREBASE_KEY,
+	SECRET_FIREBASE_PROJECT_ID
 } from '$env/static/private';
+import admin from 'firebase-admin';
 
-admin.initializeApp({
+export const firebase = admin.initializeApp({
 	credential: admin.credential.cert({
 		projectId: SECRET_FIREBASE_PROJECT_ID,
 		clientEmail: SECRET_FIREBASE_CLIENT_EMAIL,
