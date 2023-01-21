@@ -18,7 +18,7 @@
 </script>
 
 <div class="h-screen w-full flex flex-col">
-	<div class="h-[15%] flex">
+	<div class="md:h-[15%] flex">
 		<div
 			class="h-full w-[15vw] min-w-[96px] flex justify-center items-center"
 			style="background-color: {$site.data?.colors?.['primary']};"
@@ -31,13 +31,13 @@
 
 			<a
 				href="https://goo.gl/maps/xnrVdnmWMLTrbrxa7"
-				class="flex items-center px-8 text-gray-800 whitespace-nowrap"
+				class="hidden md:flex items-center px-8 text-gray-800 whitespace-nowrap"
 			>
 				<ContactText type="address" />
 			</a>
 			<a
 				href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}
-				class="border-l bg-gray-50 text-gray-800 h-full px-8 flex items-center"
+				class="border-l bg-gray-50 text-gray-800 h-full px-8 py-6 flex items-center"
 			>
 				<span class="block sm:hidden">Ring</span>
 				<span class="hidden sm:block"><ContactText type="phone" /> </span>
@@ -51,18 +51,36 @@
 			<img src={ArrowDown} alt="" />
 		</div>
 
-		<div class="flex flex-col sm:flex-row flex-grow">
-			<div class="flex-grow h-full bg-cover" style="background-image: url({images?.hero});" />
+		<div class="flex flex-col md:flex-row flex-grow">
+			<div
+				class="flex-grow h-full bg-cover bg-center"
+				style="background-image: url({images?.hero});"
+			/>
 
 			<div
-				class="sm:w-1/2 h-full flex flex-col gap-2 justify-center items-center sm:items-start text-center sm:text-left px-12"
+				class="md:w-1/2 h-full flex flex-col gap-4 justify-center items-center md:items-start text-center md:text-left p-12"
 			>
-				<h1 class="text-3xl md:text-4xl 2xl:text-5xl font-lora">
+				<h1 class="text-3xl md:text-4xl 2xl:text-6xl font-lora">
 					<Text id="heroHeading" />
 				</h1>
-				<p class="max-w-xs">
+				<p class="max-w-xs 2xl:max-w-md 2xl:text-lg">
 					<Text id="heroText" />
 				</p>
+
+				<div class="flex items-center gap-6">
+					<button
+						class="text-white 2xl:text-lg py-3 px-4"
+						style="background-color: {$site.data?.colors?.['primary']};"
+					>
+						Se Menyn
+					</button>
+
+					<button
+						class="2xl:text-lg border-b -mb-px hover:pb-1 hover:-mb-1 border-black h-min duration-100"
+					>
+						Hitta hit
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -71,17 +89,20 @@
 <div use:scrollRef={'about'} class="flex h-[85vh]">
 	<div class="md:ml-[15%] flex flex-col-reverse md:flex-row flex-grow">
 		<div
-			class="h-full md:w-1/2 flex flex-col gap-2 justify-center items-center sm:items-start text-center sm:text-left px-12"
+			class="h-full md:w-1/2 flex flex-col gap-4 justify-center items-center md:items-start text-center md:text-left p-12"
 		>
-			<h2 class="text-3xl md:text-4xl 2xl:text-5xl font-lora">
+			<h2 class="text-3xl md:text-4xl 2xl:text-6xl font-lora">
 				<Text id="aboutHeading" />
 			</h2>
-			<p>
+			<p class="max-w-md 2xl:max-w-xl 2xl:text-lg">
 				<Text id="aboutText" />
 			</p>
 		</div>
 
-		<div class="flex-grow h-full bg-cover" style="background-image: url({images?.about});" />
+		<div
+			class="flex-grow h-full bg-cover bg-center"
+			style="background-image: url({images?.about});"
+		/>
 	</div>
 </div>
 
@@ -102,7 +123,7 @@
 			</h2>
 		</div>
 
-		<div class="sm:flex text-sm text-center container" id="reviews">
+		<div class="md:flex text-md text-center container" id="reviews">
 			{#if $site.data?.reviews}
 				{#each $site.data.reviews as review}
 					<div>
@@ -131,7 +152,7 @@
 			</p>
 		</div>
 
-		<div class="flex flex-col-reverse sm:flex-row gap-3 sm:gap-6">
+		<div class="flex flex-col-reverse md:flex-row gap-3 md:gap-6">
 			<a href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}>
 				<button
 					class="flex items-center h-full p-4 text-xl leading-none border-2 border-white gap-3"
@@ -162,7 +183,7 @@
 			</a>
 		</div>
 	</div>
-	<div class="sm:w-[15vw]" />
+	<div class="md:w-[15vw]" />
 </div>
 
 <footer class="text-sm">
@@ -172,14 +193,14 @@
 				<img class="w-36" src={globalImages?.logoAlt} alt="" />
 			</div>
 
-			<div class="col-span-2 flex flex-col md:flex-row relative">
+			<div class="col-span-2 flex flex-col md:flex-row relative gap-4">
 				<div class="md:w-1/2 px-4 flex flex-col gap-2">
 					{#if $site.data?.openingHours}
 						<h3 class="text-lg font-lora font-semibold">Öppettider</h3>
 						{#each $site.data.openingHours as day}
 							<div class="flex justify-between">
 								<span>{day.weekday}</span>
-								<span>{day.time}</span>
+								<span class="text-right">{day.time}</span>
 							</div>
 						{/each}
 					{/if}
@@ -188,14 +209,23 @@
 					<h3 class="text-lg font-lora font-semibold">Hör av dig!</h3>
 					<div class="flex justify-between">
 						<span>Email</span>
-						<a href={'mailto:' + $site.data?.contact?.email}><ContactText type="email" /></a>
+						<a class="text-right" href={'mailto:' + $site.data?.contact?.email}>
+							<ContactText type="email" />
+						</a>
 					</div>
 
 					<div class="flex justify-between">
 						<span>Telefon</span>
-						<a href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}
-							><ContactText type="phone" /></a
-						>
+						<a class="text-right" href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}>
+							<ContactText type="phone" />
+						</a>
+					</div>
+
+					<div class="flex md:hidden justify-between">
+						<span>Adress</span>
+						<a class="text-right" href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}>
+							<ContactText type="address" />
+						</a>
 					</div>
 				</div>
 			</div>
