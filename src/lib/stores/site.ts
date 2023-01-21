@@ -44,6 +44,7 @@ export type SiteData = {
 	tagline: string;
 	hosts: string[];
 	theme: string;
+	ico: string;
 };
 
 const site = writable<Site>();

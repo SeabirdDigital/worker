@@ -1,7 +1,7 @@
 import type { Site } from '$lib/stores/site';
 import admin from 'firebase-admin';
 
-export const getPageImages = async (site: Site, pageId: string | undefined = undefined) => {
+export const getImages = async (site: Site, pageId: string | undefined = undefined) => {
 	const bucket = admin.storage().bucket('gs://seabirdportal.appspot.com');
 	const imageFiles = pageId ? site.pages[pageId]?.images : site.data?.images;
 
@@ -18,4 +18,17 @@ export const getPageImages = async (site: Site, pageId: string | undefined = und
 	}
 
 	return images;
+};
+
+export const getImage = async (site: Site, filename: string) => {
+	const bucket = admin.storage().bucket('gs://seabirdportal.appspot.com');
+
+	const imageURL = (
+		await bucket.file(site.id + '/' + filename).getSignedUrl({
+			action: 'read',
+			expires: '03-17-2025' // this is an arbitrary date
+		})
+	)[0];
+
+	return imageURL;
 };

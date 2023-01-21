@@ -1,5 +1,5 @@
 import type { Site } from '$lib/stores/site';
-import { getPageImages } from '$lib/tools/Images';
+import { getImage, getImages } from '$lib/tools/Images';
 import { getFirestore } from 'firebase-admin/firestore';
 import type { LayoutServerLoad } from './$types';
 
@@ -33,12 +33,14 @@ export const load: LayoutServerLoad = async (data) => {
 	if (currentSite?.pages[pageId]) {
 		currentSite.data = {
 			...currentSite.data,
-			images: await getPageImages(currentSite)
+			images: await getImages(currentSite)
 		};
-		currentSite.pages[pageId].images = await getPageImages(
+		currentSite.pages[pageId].images = await getImages(
 			currentSite,
 			data.url.pathname == '/' ? 'home' : data.url.pathname
 		);
+
+		currentSite.siteData.ico = await getImage(currentSite, currentSite.siteData.ico);
 
 		return {
 			currentSite
