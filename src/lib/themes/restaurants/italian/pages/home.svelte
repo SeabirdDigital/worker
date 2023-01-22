@@ -14,7 +14,7 @@
 	const images = $site.pages[$pageId].images;
 	const globalImages = $site.data?.images;
 
-	console.log($site.data?.contact?.phone);
+	const links = $site.data?.links;
 </script>
 
 <div class="h-screen w-full flex flex-col">
@@ -30,7 +30,7 @@
 			<div class="flex-grow" />
 
 			<a
-				href="https://goo.gl/maps/xnrVdnmWMLTrbrxa7"
+				href={links?.['map']}
 				class="hidden md:flex items-center px-8 text-gray-800 whitespace-nowrap"
 			>
 				<ContactText type="address" />
@@ -68,18 +68,22 @@
 				</p>
 
 				<div class="flex items-center gap-6">
-					<button
-						class="text-white 2xl:text-lg py-3 px-4"
-						style="background-color: {$site.data?.colors?.['primary']};"
-					>
-						Se Menyn
-					</button>
+					<a href={links?.['menu']}>
+						<button
+							class="text-white 2xl:text-lg py-3 px-4"
+							style="background-color: {$site.data?.colors?.['primary']};"
+						>
+							Se Menyn
+						</button>
+					</a>
 
-					<button
-						class="2xl:text-lg border-b -mb-px hover:pb-1 hover:-mb-1 border-black h-min duration-100"
-					>
-						Hitta hit
-					</button>
+					<a href={links?.['map']}>
+						<button
+							class="2xl:text-lg border-b -mb-px hover:pb-1 hover:-mb-1 border-black h-min duration-100"
+						>
+							Hitta hit
+						</button>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -167,7 +171,7 @@
 					<ContactText type="phone" />
 				</button>
 			</a>
-			<a href="https://www.foodora.se/restaurant/p4ht/solo-pizza">
+			<a href={links?.['foodora']}>
 				<button
 					class="flex items-center h-full p-4 text-xl leading-none border-2 bg-white text-black gap-4 hover:gap-5 hover:-mr-1 duration-150"
 				>

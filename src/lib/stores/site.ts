@@ -25,6 +25,9 @@ export type Site = {
 			phone?: string;
 			email?: string;
 		};
+		links?: {
+			[key: string]: string;
+		};
 		colors?: {
 			[key: string]: string;
 		};
