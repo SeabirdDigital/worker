@@ -10,7 +10,13 @@
 	const currentSite: Site = data.currentSite;
 
 	site.set(currentSite);
-	theme.set(themes[import.meta.env.VITE_THEME ?? currentSite.siteData.theme]);
+	theme.set(
+		themes[
+			import.meta.env.VITE_THEME ??
+				$page.url.searchParams.get('theme') ??
+				currentSite.siteData.theme
+		]
+	);
 
 	const pathname = $page.url.pathname;
 	pageId.set(pathname == '/' ? 'home' : pathname.substring(1));

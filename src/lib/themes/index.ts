@@ -1,5 +1,6 @@
 import { IndianRestaurant } from './restaurants/indian';
 import { ItalianRestaurant } from './restaurants/italian';
+import { JapaneseRestaurant } from './restaurants/japanese';
 import { ModernRestaurant } from './restaurants/modern';
 
 export type Theme = {
@@ -13,7 +14,8 @@ export type Theme = {
 const themes: { [id: string]: Theme } = {
 	ModernRestaurant,
 	IndianRestaurant,
-	ItalianRestaurant
+	ItalianRestaurant,
+	JapaneseRestaurant
 };
 
 export default themes;
