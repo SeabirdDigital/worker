@@ -14,7 +14,9 @@
 </script>
 
 <header class="container flex justify-between h-24 py-6 mb-4">
-	<img src={globalImages?.logo} alt="Logo" />
+	<div>
+		<img src={globalImages?.logo} alt="Logo" />
+	</div>
 
 	<div class="flex items-center gap-4">
 		<a href={links?.map}>
