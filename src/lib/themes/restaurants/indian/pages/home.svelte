@@ -4,6 +4,16 @@
 	import pattern from '../assets/pattern.svg';
 
 	import Text from '$lib/components/Text.svelte';
+	import site from '$lib/stores/site';
+	import pageId from '$lib/stores/pageId';
+	import ContactText from '$lib/components/ContactText.svelte';
+	import Quote from '../components/icons/Quote.svg';
+	import Star from '../components/icons/Star.svg';
+
+	const images = $site.pages[$pageId].images;
+	const globalImages = $site.data?.images;
+
+	const links = $site.data?.links;
 </script>
 
 <div class="z-50 absolute w-full">
@@ -31,9 +41,9 @@
 </div>
 
 <div class="overflow-hidden">
-	<div class="container pt-32 pb-20 lg:pb-32 relative grid lg:grid-cols-2 gap-8">
+	<div class="container pt-40 pb-20 lg:pb-40 relative grid lg:grid-cols-2 gap-8">
 		<div class="flex flex-col justify-center lg:pr-8">
-			<h1 class="font-aladin text-6xl sm:text-7xl mb-4">
+			<h1 class="font-aladin text-6xl sm:text-6xl mb-4">
 				<Text id="heroHeading" />
 			</h1>
 			<p>
@@ -72,7 +82,7 @@
 <div class="bg-rh-red">
 	<div class="container py-24 grid lg:grid-cols-2 gap-24 text-white">
 		<div class="flex flex-col justify-center">
-			<h2 class="font-aladin text-6xl mb-4">
+			<h2 class="font-aladin text-5xl mb-4">
 				<Text id="aboutHeading" />
 			</h2>
 			<p class="lg:w-5/6">
@@ -103,7 +113,7 @@
 
 		<div class="flex justify-center items-center">
 			<iframe
-				title="Googl Maps"
+				title="Google Maps"
 				class="h-[450px] w-full lg:w-[600px]"
 				height="450px"
 				width="600px"
@@ -116,17 +126,42 @@
 	</div>
 </div>
 
-<footer class="bg-rh-dark text-white">
-	<div class="container py-24 grid lg:grid-cols-2 gap-10">
-		<div>
-			<h2 class="font-aladin text-5xl mb-4">Kontakt</h2>
-			<div class="grid lg:grid-cols-2 gap-4">
-				<a href="https://goo.gl/maps/7tSmAYLqwyRtGMov6" class="underline hover:no-underline">
-					Södra Hunnetorpsvägen 54,<br />
-					256 62 Helsingborg
-				</a>
+<div class="flex flex-col items-center justify-center flex-grow gap-4 py-20">
+	<div class="relative">
+		<img class="-z-10 absolute -top-12 -left-16 h-36" src={Quote} alt="" />
 
-				<div class="flex lg:flex-col gap-2">
+		<h2 class="text-4xl md:text-4xl 2xl:text-5xl font-aladin">
+			<Text id="reviewsHeading" />
+		</h2>
+	</div>
+
+	<div class="md:grid grid-cols-3 text-md text-center container text-base" id="reviews">
+		{#if $site.data?.reviews}
+			{#each $site.data.reviews as review}
+				<div>
+					<p>
+						{@html review.message}
+					</p>
+					<span>{review.author}</span>
+				</div>
+			{/each}
+		{/if}
+	</div>
+</div>
+
+<footer class="bg-rh-dark text-white">
+	<div class="container text-center lg:text-left py-24 grid lg:grid-cols-2 gap-10">
+		<div>
+			<h2 class="font-aladin text-4xl mb-2">Kontakt</h2>
+			<div class="grid lg:grid-cols-2 gap-2">
+				<div class="flex flex-col">
+					<h4>Adress:</h4>
+					<a href="https://goo.gl/maps/7tSmAYLqwyRtGMov6" class="underline hover:no-underline">
+						<ContactText type="address" />
+					</a>
+				</div>
+
+				<div class="flex flex-col">
 					<h4>Telefon:</h4>
 					<a href="tel:042121688" class="underline hover:no-underline"> 042-12 16 88 </a>
 				</div>
@@ -134,32 +169,31 @@
 		</div>
 
 		<div>
-			<h2 class="font-aladin text-5xl mb-4">Öppetider</h2>
-			<div class="grid lg:grid-cols-3 gap-4">
-				<div class="flex lg:flex-col gap-2">
-					<h4>Måndag - Torsdag:</h4>
-					<p>11:00 - 21:00</p>
+			{#if $site.data?.openingHours}
+				<h2 class="font-aladin text-4xl mb-2">Öppetider</h2>
+				<div class="grid lg:grid-cols-3 gap-2">
+					{#each $site.data.openingHours as day}
+						<div class="flex flex-col">
+							<span>{day.weekday}</span>
+							<span>{day.time}</span>
+						</div>
+					{/each}
 				</div>
-				<div class="flex lg:flex-col gap-2">
-					<h4>Fredag - Lördag:</h4>
-					<p>11:00 - 22:00</p>
-				</div>
-				<div class="flex lg:flex-col gap-2">
-					<h4>Söndag:</h4>
-					<p>12:00 - 21:00</p>
-				</div>
-			</div>
+			{/if}
 		</div>
 	</div>
 
 	<div class="container pb-8 text-center">
-		<span
-			>2022 Restaurang Royal Haveli © Alla rättigheter förbehållna. Sida av <a
-				href="https://seabird.digital"
-				target="_blank"
-				rel="noreferrer"
-				class="underline hover:no-underline">Seabird Digital</a
-			></span
-		>
+		Copyright 2023 © Seabird Digital UD. Alla rättigheter förbehållna.
 	</div>
 </footer>
+
+<style lang="postcss">
+	#reviews > div {
+		@apply px-8 py-6 flex flex-col gap-4;
+	}
+
+	#reviews span {
+		@apply font-bold;
+	}
+</style>
