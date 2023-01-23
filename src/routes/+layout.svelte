@@ -31,6 +31,8 @@
 </script>
 
 <svelte:head>
+	<link rel="icon" href={$site.siteData.ico} />
+
 	<title>
 		{$site.siteData.siteName}
 		{$site.siteData.tagline ? ` | ${$site.siteData.tagline}` : ''}

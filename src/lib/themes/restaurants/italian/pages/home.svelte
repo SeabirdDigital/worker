@@ -1,67 +1,112 @@
 <script>
+	import { scrollRef, scrollTo, scrollTop } from 'svelte-scrolling';
+
+	import ContactText from '$lib/components/ContactText.svelte';
 	import Text from '$lib/components/Text.svelte';
 	import ArrowDown from '../components/icons/ArrowDown.svg';
 	import ChevronRight from '../components/icons/ChevronRight.svg';
 	import Quote from '../components/icons/Quote.svg';
 	import Star from '../components/icons/Star.svg';
+
+	import pageId from '$lib/stores/pageId';
+	import site from '$lib/stores/site';
+
+	const images = $site.pages[$pageId].images;
+	const globalImages = $site.data?.images;
+
+	const links = $site.data?.links;
 </script>
 
 <div class="h-screen w-full flex flex-col">
-	<div class="h-[15%] flex">
-		<div class="h-full w-[15vw] min-w-[96px] bg-si-brown flex justify-center items-center">
-			<img class="w-[60%]" src="/si/logo.png" alt="s" />
+	<div class="md:h-[15%] flex">
+		<div
+			class="h-full w-[15vw] min-w-[96px] flex justify-center items-center"
+			style="background-color: {$site.data?.colors?.['primary']};"
+		>
+			<img class="w-[60%]" src={globalImages?.logo} alt="Logo" />
 		</div>
 
 		<div class="flex flex-grow border-b">
 			<div class="flex-grow" />
 
-			<div class="flex items-center px-8 text-gray-800 whitespace-nowrap">
-				Norregatan 15,<br />211 27 Malmö
-			</div>
-			<div class="border-l bg-gray-50 text-gray-800 h-full px-8 flex items-center">
+			<a
+				href={links?.['map']}
+				class="hidden md:flex items-center px-8 text-gray-800 whitespace-nowrap"
+			>
+				<ContactText type="address" />
+			</a>
+			<a
+				href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}
+				class="border-l bg-gray-50 text-gray-800 h-full px-8 py-6 flex items-center"
+			>
 				<span class="block sm:hidden">Ring</span>
-				<span class="hidden sm:block"> +46 (0)40-23 45 88 </span>
+				<span class="hidden sm:block"><ContactText type="phone" /> </span>
 				<img class="h-6" src={ChevronRight} alt="" />
-			</div>
+			</a>
 		</div>
 	</div>
 
 	<div class="flex flex-grow">
-		<div class="hidden w-[15vw] md:flex items-end justify-center pb-12">
+		<div use:scrollTo={'about'} class="hidden w-[15vw] md:flex items-end justify-center pb-12">
 			<img src={ArrowDown} alt="" />
 		</div>
 
-		<div class="flex flex-col sm:flex-row flex-grow">
-			<div class="flex-grow h-full bg-cover" style="background-image: url(/si/hero.png);" />
+		<div class="flex flex-col md:flex-row flex-grow">
+			<div
+				class="flex-grow h-full bg-cover bg-center"
+				style="background-image: url({images?.hero});"
+			/>
 
 			<div
-				class="sm:w-1/2 h-full flex flex-col gap-2 justify-center items-center sm:items-start text-center sm:text-left px-12"
+				class="md:w-1/2 h-full flex flex-col gap-4 justify-center items-center md:items-start text-center md:text-left p-12"
 			>
-				<h1 class="text-3xl md:text-4xl 2xl:text-5xl font-lora">
+				<h1 class="text-3xl md:text-4xl 2xl:text-6xl font-lora">
 					<Text id="heroHeading" />
 				</h1>
-				<p class="max-w-xs">
+				<p class="max-w-xs 2xl:max-w-md 2xl:text-lg">
 					<Text id="heroText" />
 				</p>
+
+				<div class="flex items-center gap-6">
+					<a href={links?.['menu']}>
+						<button
+							class="text-white 2xl:text-lg py-3 px-4"
+							style="background-color: {$site.data?.colors?.['primary']};"
+						>
+							Se Menyn
+						</button>
+					</a>
+
+					<a href={links?.['map']}>
+						<button
+							class="2xl:text-lg border-b -mb-px hover:pb-1 hover:-mb-1 border-black h-min duration-100"
+						>
+							Hitta hit
+						</button>
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="flex h-[85vh]">
+<div use:scrollRef={'about'} class="flex h-[85vh]">
 	<div class="md:ml-[15%] flex flex-col-reverse md:flex-row flex-grow">
 		<div
-			class="h-full md:w-1/2 flex flex-col gap-2 justify-center items-center sm:items-start text-center sm:text-left px-12"
+			class="h-full md:w-1/2 flex flex-col gap-4 justify-center items-center md:items-start text-center md:text-left p-12"
 		>
-			<h2 class="text-3xl md:text-4xl 2xl:text-5xl font-lora">
+			<h2 class="text-3xl md:text-4xl 2xl:text-6xl font-lora">
 				<Text id="aboutHeading" />
 			</h2>
-			<p>
+			<p class="max-w-md 2xl:max-w-xl 2xl:text-lg">
 				<Text id="aboutText" />
 			</p>
 		</div>
 
-		<div class="flex-grow h-full bg-cover" style="background-image: url(/si/about.jpg);" />
+		<div
+			class="flex-grow h-full bg-cover bg-center"
+			style="background-image: url({images?.about});"
+		/>
 	</div>
 </div>
 
@@ -77,32 +122,22 @@
 		<div class="relative">
 			<img class="-z-10 absolute -top-12 -left-16 h-36" src={Quote} alt="" />
 
-			<h2 class="text-4xl md:text-4xl 2xl:text-5xl font-lora">Recensioner</h2>
+			<h2 class="text-4xl md:text-4xl 2xl:text-5xl font-lora">
+				<Text id="reviewsHeading" />
+			</h2>
 		</div>
 
-		<div class="sm:flex text-sm text-center container" id="reviews">
-			<div>
-				<p>
-					Mycket god pizza och servicen var mycket bra.
-					<b>Kocken vet hur man gör riktig italiensk pizza.</b>
-					Tack för pizzan.
-				</p>
-				<span>Mubinul Mulk</span>
-			</div>
-			<div>
-				<p>
-					<b>Bästa pizzan i Malmö. Hands down.</b> Alla ingredienser är färska och alla rätt (som jag
-					smakat) klassar alla andra pizzerior jag har käkat på!
-				</p>
-				<span>Victor Schack</span>
-			</div>
-			<div>
-				<p>
-					Fantastisk pizza. Nya ägaren levererar. <b>En slice räckte</b> för att jag skulle skriva en
-					recension. Vi ses igen.
-				</p>
-				<span>Linus Persson</span>
-			</div>
+		<div class="md:flex text-md text-center container" id="reviews">
+			{#if $site.data?.reviews}
+				{#each $site.data.reviews as review}
+					<div>
+						<p>
+							{@html review.message}
+						</p>
+						<span>{review.author}</span>
+					</div>
+				{/each}
+			{/if}
 		</div>
 	</div>
 </div>
@@ -110,7 +145,7 @@
 <div class="flex">
 	<div
 		class="flex flex-col lg:flex-row gap-4 justify-between flex-grow pl-[15%] px-8 py-12 bg-cover text-white"
-		style="background-image: url(/si/italia.jpg);"
+		style="background-image: url({images?.italia});"
 	>
 		<div>
 			<h2 class="text-4xl md:text-4xl 2xl:text-5xl font-lora">
@@ -121,8 +156,8 @@
 			</p>
 		</div>
 
-		<div class="flex flex-col-reverse sm:flex-row gap-3 sm:gap-6">
-			<a href="tel:+4640234588">
+		<div class="flex flex-col-reverse md:flex-row gap-3 md:gap-6">
+			<a href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}>
 				<button
 					class="flex items-center h-full p-4 text-xl leading-none border-2 border-white gap-3"
 				>
@@ -133,10 +168,10 @@
 						/>
 						<path fill="none" d="M0 0h36v36H0z" />
 					</svg>
-					(0)40-23 45 88
+					<ContactText type="phone" />
 				</button>
 			</a>
-			<a href="https://www.foodora.se/restaurant/p4ht/solo-pizza">
+			<a href={links?.['foodora']}>
 				<button
 					class="flex items-center h-full p-4 text-xl leading-none border-2 bg-white text-black gap-4 hover:gap-5 hover:-mr-1 duration-150"
 				>
@@ -152,39 +187,49 @@
 			</a>
 		</div>
 	</div>
-	<div class="sm:w-[15vw]" />
+	<div class="md:w-[15vw]" />
 </div>
 
 <footer class="text-sm">
 	<div class="mt-24 container">
 		<div class="relative border-y py-16 flex flex-col gap-8 md:gap-0 md:grid md:grid-cols-3">
 			<div class="w-full flex justify-center md:justify-start">
-				<img class="w-36" src="/si/logo.svg" alt="" />
+				<img class="w-36" src={globalImages?.logoAlt} alt="" />
 			</div>
 
-			<div class="col-span-2 flex flex-col md:flex-row relative">
+			<div class="col-span-2 flex flex-col md:flex-row relative gap-4">
 				<div class="md:w-1/2 px-4 flex flex-col gap-2">
-					<h3 class="text-lg font-lora font-semibold">Öppettider</h3>
-					<div class="flex justify-between">
-						<span>Måndag till Lördag</span>
-						<span>11:00 - 22:30</span>
-					</div>
-
-					<div class="flex justify-between">
-						<span>Söndag</span>
-						<span>11:00 - 22:00</span>
-					</div>
+					{#if $site.data?.openingHours}
+						<h3 class="text-lg font-lora font-semibold">Öppettider</h3>
+						{#each $site.data.openingHours as day}
+							<div class="flex justify-between">
+								<span>{day.weekday}</span>
+								<span class="text-right">{day.time}</span>
+							</div>
+						{/each}
+					{/if}
 				</div>
 				<div class="md:w-1/2 px-4 flex flex-col gap-2">
 					<h3 class="text-lg font-lora font-semibold">Hör av dig!</h3>
 					<div class="flex justify-between">
 						<span>Email</span>
-						<span>ciao@soloitaliano.se</span>
+						<a class="text-right" href={'mailto:' + $site.data?.contact?.email}>
+							<ContactText type="email" />
+						</a>
 					</div>
 
 					<div class="flex justify-between">
 						<span>Telefon</span>
-						<span>+46 (0)40-23 45 88</span>
+						<a class="text-right" href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}>
+							<ContactText type="phone" />
+						</a>
+					</div>
+
+					<div class="flex md:hidden justify-between">
+						<span>Adress</span>
+						<a class="text-right" href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}>
+							<ContactText type="address" />
+						</a>
 					</div>
 				</div>
 			</div>
