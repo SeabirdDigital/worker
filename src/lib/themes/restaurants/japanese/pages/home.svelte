@@ -15,7 +15,7 @@
 
 <header class="container flex justify-between h-24 py-6 mb-4">
 	<div>
-		<img src={globalImages?.logo} alt="Logo" />
+		<img src={globalImages?.logo} class="h-full" alt="Logo" />
 	</div>
 
 	<div class="flex items-center gap-4">
