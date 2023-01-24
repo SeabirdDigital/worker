@@ -11,6 +11,6 @@
 	/>
 </svelte:head>
 
-<main class="bg-zinc-900 text-white font-nunito text-lg">
+<main class="bg-zinc-900 text-[#fef7ec] font-nunito text-lg">
 	<slot />
 </main>
