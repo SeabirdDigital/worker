@@ -194,7 +194,7 @@
 	<div class="mt-24 container">
 		<div class="relative border-y py-16 flex flex-col gap-8 md:gap-0 md:grid md:grid-cols-3">
 			<div class="w-full flex justify-center md:justify-start">
-				<img class="w-36" src={globalImages?.logoAlt} alt="" />
+				<img class="w-36" src={globalImages?.logoAlt ?? globalImages?.logo} alt="" />
 			</div>
 
 			<div class="col-span-2 flex flex-col md:flex-row relative gap-4">
