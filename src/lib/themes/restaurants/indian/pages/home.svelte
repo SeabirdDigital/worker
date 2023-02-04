@@ -1,12 +1,8 @@
 <script>
-	import logo from '../assets/logo.png';
-	import spices from '../assets/spices.svg';
-	import pattern from '../assets/pattern.svg';
-
-	import Text from '$lib/components/Text.svelte';
-	import site from '$lib/stores/site';
-	import pageId from '$lib/stores/pageId';
 	import ContactText from '$lib/components/ContactText.svelte';
+	import Text from '$lib/components/Text.svelte';
+	import pageId from '$lib/stores/pageId';
+	import site from '$lib/stores/site';
 	import Quote from '../components/icons/Quote.svg';
 	import Star from '../components/icons/Star.svg';
 
@@ -19,13 +15,14 @@
 <div class="z-50 absolute w-full">
 	<div class="mt-6 px-2 container grid grid-cols-2">
 		<div>
-			<img height="64px" width="64px" src={logo} alt="Logo" />
+			<img height="64px" width="64px" src={globalImages?.logo} alt="Logo" />
 		</div>
 
 		<div class="flex justify-end items-center">
 			<a
 				href="tel:042121688"
-				class="text-white bg-rh-red shadow-hard shadow-rh-dark hover:shadow-none duration-200 py-4 px-5 w-fit h-fit flex items-center gap-2"
+				style="background-color: {$site.data?.colors?.primary};"
+				class="text-white shadow-hard shadow-rh-dark hover:shadow-none duration-200 py-4 px-5 w-fit h-fit flex items-center gap-2"
 			>
 				<svg width="18" height="18" viewBox="0 0 36 36">
 					<path
@@ -41,7 +38,7 @@
 </div>
 
 <div class="overflow-hidden">
-	<div class="container pt-40 pb-20 lg:pb-40 relative grid lg:grid-cols-2 gap-8">
+	<div class="container pt-40 lg:pb-40 lg:relative grid lg:grid-cols-2 gap-8">
 		<div class="flex flex-col justify-center lg:pr-8">
 			<h1 class="font-aladin text-6xl sm:text-6xl mb-4">
 				<Text id="heroHeading" />
@@ -54,7 +51,8 @@
 				href="https://qopla.se"
 				target="_blank"
 				rel="noreferrer"
-				class="text-white bg-rh-red py-3 px-5 shadow-hard hover:shadow-none shadow-rh-dark duration-200 w-fit flex items-center gap-2 mt-6"
+				style="background-color: {$site.data?.colors?.primary};"
+				class="text-white py-3 px-5 shadow-hard hover:shadow-none shadow-rh-dark duration-200 w-fit flex items-center gap-2 mt-6"
 			>
 				Se Menyn
 				<svg class="rotate-90" width="18" height="18" viewBox="0 0 36 36">
@@ -66,20 +64,16 @@
 				</svg>
 			</a>
 		</div>
-		<div class="flex justify-center items-center">
-			<img src={spices} alt="" />
-		</div>
-		<div class="-z-10 h-full lg:h-[150%] w-[32rem] absolute bottom-0 right-0">
+		<div class="h-[30vh] lg:h-auto mt-12 lg:mt-0">
 			<div
-				class="absolute left-1/2 lg:-right-[75%] -bottom-[40%] lg:-bottom-[20%] h-full w-full bg-rh-dark rotate-45 lg:rotate-[24deg]"
-			>
-				<div class="h-full w-full bg-cover" style="background-image: url({pattern});" />
-			</div>
+				class="-z-10 h-[30vh] w-full lg:h-[175%] lg:w-[32rem] absolute lg:-bottom-[30%] left-0 lg:left-auto right-0 bg-cover lg:rotate-[24deg]"
+				style="background-image: url({images?.hero});"
+			/>
 		</div>
 	</div>
 </div>
 
-<div class="bg-rh-red">
+<div style="background-color: {$site.data?.colors?.primary};">
 	<div class="container py-24 grid lg:grid-cols-2 gap-24 text-white">
 		<div class="flex flex-col justify-center">
 			<h2 class="font-aladin text-5xl mb-4">
