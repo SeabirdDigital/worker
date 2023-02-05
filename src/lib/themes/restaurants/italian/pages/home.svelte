@@ -29,7 +29,7 @@
 				<span class="text-center font-nunito font-bold 2xl:text-3xl">
 					{$site.siteData.siteName}
 				</span>
-			{/if}aswell
+			{/if}
 		</div>
 
 		<div class="flex flex-grow border-b">
