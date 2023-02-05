@@ -1,28 +1,32 @@
-<script>
+<script lang="ts">
 	import ContactText from '$lib/components/ContactText.svelte';
 	import Text from '$lib/components/Text.svelte';
-	import pageId from '$lib/stores/pageId';
-	import site from '$lib/stores/site';
+	import siteStore from '$lib/stores/site';
+	import type { IndianSite } from '..';
 	import Quote from '../components/icons/Quote.svg';
-	import Star from '../components/icons/Star.svg';
 
-	const images = $site.pages[$pageId].images;
-	const globalImages = $site.data?.images;
+	const site = $siteStore as IndianSite;
 
-	const links = $site.data?.links;
+	const images = site.pages.home.images;
+	const globalImages = site.data?.images;
+
+	const links = site.data?.links;
 </script>
 
 <div class="z-50 absolute w-full">
 	<div class="mt-6 px-2 container grid grid-cols-2">
 		<div>
-			<img height="64px" width="64px" src={globalImages?.logo} alt="Logo" />
+			{#if globalImages?.logo}
+				<img height="64px" width="64px" src={globalImages?.logo} alt="Logo" />
+			{:else}
+				<span>{site.siteData.siteName}</span>
+			{/if}
 		</div>
 
 		<div class="flex justify-end items-center">
 			<a
 				href="tel:042121688"
-				style="background-color: {$site.data?.colors?.primary};"
-				class="text-white shadow-hard shadow-rh-dark hover:shadow-none duration-200 py-4 px-5 w-fit h-fit flex items-center gap-2"
+				class="text-white shadow-hard bg-rh-primary shadow-rh-dark hover:shadow-none duration-200 py-4 px-5 w-fit h-fit flex items-center gap-2"
 			>
 				<svg width="18" height="18" viewBox="0 0 36 36">
 					<path
@@ -40,7 +44,7 @@
 <div class="overflow-hidden">
 	<div class="container pt-40 lg:pb-40 lg:relative grid lg:grid-cols-2 gap-8">
 		<div class="flex flex-col justify-center lg:pr-8">
-			<h1 class="font-aladin text-6xl sm:text-6xl mb-4">
+			<h1 class="font-heading font-bold text-4xl md:text-5xl mb-4">
 				<Text id="heroHeading" />
 			</h1>
 			<p>
@@ -48,11 +52,8 @@
 			</p>
 
 			<a
-				href="https://qopla.se"
-				target="_blank"
-				rel="noreferrer"
-				style="background-color: {$site.data?.colors?.primary};"
-				class="text-white py-3 px-5 shadow-hard hover:shadow-none shadow-rh-dark duration-200 w-fit flex items-center gap-2 mt-6"
+				href={links?.menu}
+				class="text-white bg-rh-primary py-3 px-5 shadow-hard hover:shadow-none shadow-rh-dark duration-200 w-fit flex items-center gap-2 mt-6"
 			>
 				Se Menyn
 				<svg class="rotate-90" width="18" height="18" viewBox="0 0 36 36">
@@ -66,26 +67,26 @@
 		</div>
 		<div class="h-[30vh] lg:h-auto mt-12 lg:mt-0">
 			<div
-				class="-z-10 h-[30vh] w-full lg:h-[175%] lg:w-[32rem] absolute lg:-bottom-[30%] left-0 lg:left-auto right-0 bg-cover lg:rotate-[24deg]"
+				class="-z-10 h-[30vh] w-full lg:h-[175%] lg:w-[32rem] absolute lg:-bottom-[30%] left-0 lg:left-auto right-0 lg:-right-12 bg-cover lg:rotate-[24deg]"
 				style="background-image: url({images?.hero});"
 			/>
 		</div>
 	</div>
 </div>
 
-<div style="background-color: {$site.data?.colors?.primary};">
-	<div class="container py-24 grid lg:grid-cols-2 gap-24 text-white">
+<div class="bg-rh-primary">
+	<div class="container py-16 flex flex-col items-center text-center text-white">
 		<div class="flex flex-col justify-center">
-			<h2 class="font-aladin text-5xl mb-4">
+			<h2 class="font-heading font-bold text-4xl mb-4">
 				<Text id="aboutHeading" />
 			</h2>
-			<p class="lg:w-5/6">
+			<p>
 				<Text id="aboutText" />
 			</p>
 
-			<div class="flex items-center gap-4 mt-6">
+			<div class="flex items-center justify-center gap-4 mt-6">
 				<a
-					href="https://qopla.se"
+					href={links?.menu}
 					target="_blank"
 					rel="noreferrer"
 					class="text-white bg-rh-dark border border-rh-dark py-3 px-5 w-fit flex items-center gap-2"
@@ -104,19 +105,6 @@
 				</a>
 			</div>
 		</div>
-
-		<div class="flex justify-center items-center">
-			<iframe
-				title="Google Maps"
-				class="h-[450px] w-full lg:w-[600px]"
-				height="450px"
-				width="600px"
-				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2228.45618273587!2d12.743358550891877!3d56.045404276759804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465233b4774878a1%3A0x7561c82d1f459c87!2sRestaurang%20Royal%20Haveli!5e0!3m2!1ssv!2sse!4v1663688610661!5m2!1ssv!2sse"
-				style="border:0;"
-				loading="lazy"
-				referrerpolicy="no-referrer-when-downgrade"
-			/>
-		</div>
 	</div>
 </div>
 
@@ -124,14 +112,14 @@
 	<div class="relative">
 		<img class="-z-10 absolute -top-12 -left-16 h-36" src={Quote} alt="" />
 
-		<h2 class="text-4xl md:text-4xl 2xl:text-5xl font-aladin">
+		<h2 class="text-4xl font-heading font-bold">
 			<Text id="reviewsHeading" />
 		</h2>
 	</div>
 
 	<div class="md:grid grid-cols-3 text-md text-center container text-base" id="reviews">
-		{#if $site.data?.reviews}
-			{#each $site.data.reviews as review}
+		{#if site.data?.reviews}
+			{#each site.data.reviews as review}
 				<div>
 					<p>
 						{@html review.message}
@@ -146,11 +134,11 @@
 <footer class="bg-rh-dark text-white">
 	<div class="container text-center lg:text-left py-24 grid lg:grid-cols-2 gap-10">
 		<div>
-			<h2 class="font-aladin text-4xl mb-2">Kontakt</h2>
+			<h2 class="font-heading text-3xl mb-2">Kontakt</h2>
 			<div class="grid lg:grid-cols-2 gap-2">
 				<div class="flex flex-col">
 					<h4>Adress:</h4>
-					<a href="https://goo.gl/maps/7tSmAYLqwyRtGMov6" class="underline hover:no-underline">
+					<a href={links?.map} class="underline hover:no-underline">
 						<ContactText type="address" />
 					</a>
 				</div>
@@ -163,10 +151,10 @@
 		</div>
 
 		<div>
-			{#if $site.data?.openingHours}
-				<h2 class="font-aladin text-4xl mb-2">Öppetider</h2>
+			{#if site.data?.openingHours}
+				<h2 class="font-heading text-3xl mb-2">Öppetider</h2>
 				<div class="grid lg:grid-cols-3 gap-2">
-					{#each $site.data.openingHours as day}
+					{#each site.data.openingHours as day}
 						<div class="flex flex-col">
 							<span>{day.weekday}</span>
 							<span>{day.time}</span>

@@ -12,8 +12,8 @@
 	site.set(currentSite);
 	theme.set(
 		themes[
-			import.meta.env.VITE_THEME ??
-				$page.url.searchParams.get('theme') ??
+			$page.url.searchParams.get('theme') ??
+				import.meta.env.VITE_THEME ??
 				currentSite.siteData.theme
 		]
 	);

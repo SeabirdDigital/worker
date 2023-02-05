@@ -18,12 +18,18 @@
 </script>
 
 <div class="h-screen w-full flex flex-col">
-	<div class="md:h-[15%] flex">
+	<div class="flex">
 		<div
 			class="h-full w-[15vw] min-w-[96px] flex justify-center items-center"
 			style="background-color: {$site.data?.colors?.['primary']};"
 		>
-			<img class="w-[60%]" src={globalImages?.logo} alt="Logo" />
+			{#if globalImages?.logo}
+				<img height="64px" width="64px" src={globalImages?.logo} alt="Logo" />
+			{:else}
+				<span class="text-center font-nunito font-bold 2xl:text-3xl">
+					{$site.siteData.siteName}
+				</span>
+			{/if}aswell
 		</div>
 
 		<div class="flex flex-grow border-b">
@@ -31,7 +37,7 @@
 
 			<a
 				href={links?.['map']}
-				class="hidden md:flex items-center px-8 text-gray-800 whitespace-nowrap"
+				class="hidden md:flex items-center px-8 py-6 text-gray-800 whitespace-nowrap"
 			>
 				<ContactText type="address" />
 			</a>
@@ -144,7 +150,7 @@
 
 <div class="flex">
 	<div
-		class="flex flex-col lg:flex-row gap-4 justify-between flex-grow pl-[15%] px-8 py-12 bg-cover text-white"
+		class="flex flex-col lg:flex-row gap-4 justify-between flex-grow pl-[15%] px-8 py-12 bg-cover bg-center text-white"
 		style="background-image: url({images?.italia});"
 	>
 		<div>
@@ -194,7 +200,13 @@
 	<div class="mt-24 container">
 		<div class="relative border-y py-16 flex flex-col gap-8 md:gap-0 md:grid md:grid-cols-3">
 			<div class="w-full flex justify-center md:justify-start">
-				<img class="w-36" src={globalImages?.logoAlt ?? globalImages?.logo} alt="" />
+				{#if globalImages?.logo}
+					<img height="64px" width="64px" src={globalImages?.logo} alt="Logo" />
+				{:else}
+					<span class="text-center font-nunito font-bold 2xl:text-3xl">
+						{$site.siteData.siteName}
+					</span>
+				{/if}
 			</div>
 
 			<div class="col-span-2 flex flex-col md:flex-row relative gap-4">

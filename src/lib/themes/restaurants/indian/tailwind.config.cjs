@@ -5,16 +5,16 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				'rh-red': '#B30C47',
-				'rh-dark': '#1E1323'
+				'rh-primary': 'var(--rh-primary)',
+				'rh-dark': 'var(--rh-dark)'
 			},
 			container: {
 				center: true,
 				padding: '2rem'
 			},
 			fontFamily: {
-				aladin: ['Aladin', 'cursive'],
-				readex: ['Readex Pro', 'sans-serif']
+				heading: "'Readex Pro', sans-serif",
+				text: "'Inter', sans-serif"
 			},
 			boxShadow: {
 				hard: '4px 4px 0px black'

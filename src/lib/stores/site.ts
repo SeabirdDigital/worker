@@ -1,36 +1,36 @@
 import { writable } from 'svelte/store';
 
-export type Site = {
-	id: string;
-	siteData: SiteData;
-	pages: {
-		[pageId: string]: {
-			images?: {
-				[imageId: string]: string;
-			};
-			[objectId: string]:
-				| string
-				| {
-						[imageId: string]: string;
-				  }
-				| undefined;
-		};
-	};
-	data?: {
+type PagesDefault = {
+	[pageId: string]: {
 		images?: {
 			[imageId: string]: string;
 		};
+		[objectId: string]: string | DefaultMap | undefined;
+	};
+};
+
+type DefaultMap = {
+	[id: string]: string;
+};
+
+export type Site<
+	Pages = PagesDefault,
+	GlobalImages = DefaultMap,
+	Links = DefaultMap,
+	Colors = DefaultMap
+> = {
+	id: string;
+	siteData: SiteData;
+	pages: Pages;
+	data?: {
+		images?: GlobalImages;
 		contact?: {
 			address?: string;
 			phone?: string;
 			email?: string;
 		};
-		links?: {
-			[key: string]: string;
-		};
-		colors?: {
-			[key: string]: string;
-		};
+		links?: Links;
+		colors?: Colors;
 		openingHours?: {
 			weekday: string;
 			time: string;
