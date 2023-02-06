@@ -67,7 +67,7 @@
 		</div>
 		<div class="h-[30vh] lg:h-auto mt-12 lg:mt-0">
 			<div
-				class="-z-10 h-[30vh] w-full lg:h-[175%] lg:w-[32rem] absolute lg:-bottom-[30%] left-0 lg:left-auto right-0 lg:-right-12 bg-cover lg:rotate-[24deg]"
+				class="-z-10 h-[30vh] w-full lg:h-[175%] lg:w-[32rem] absolute lg:-bottom-[30%] left-0 lg:left-auto right-0 lg:-right-12 bg-cover bg-center lg:rotate-[24deg]"
 				style="background-image: url({images?.hero});"
 			/>
 		</div>
