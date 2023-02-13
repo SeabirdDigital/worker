@@ -28,7 +28,8 @@ export const load: LayoutServerLoad = async (data) => {
 		if (currentSite) break;
 	}
 
-	const pageId = data.url.pathname == '/' ? 'home' : data.url.pathname;
+	const pathname = data.url.pathname
+	const pageId = pathname == "/" ? "home" : pathname.substring(1).replace("portal/edit/", "");
 
 	if (currentSite?.pages[pageId]) {
 		currentSite.data = {
@@ -37,14 +38,19 @@ export const load: LayoutServerLoad = async (data) => {
 		};
 		currentSite.pages[pageId].images = await getImages(
 			currentSite,
-			data.url.pathname == '/' ? 'home' : data.url.pathname
+			pageId
 		);
 
 		currentSite.siteData.ico = await getImage(currentSite, currentSite.siteData.ico);
 
+		console.log(currentSite)
 		return {
-			currentSite
+			currentSite,
+			pageId
 		};
+	}
+	if (pathname.startsWith("/portal")) {
+		return { currentSite };
 	}
 
 	throw error(404, 'Not found');

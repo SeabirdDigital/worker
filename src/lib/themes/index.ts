@@ -2,11 +2,18 @@ import { IndianRestaurant } from './restaurants/indian';
 import { ItalianRestaurant } from './restaurants/italian';
 import { JapaneseRestaurant } from './restaurants/japanese';
 
+export type Page = new (args: {
+	target: Element | ShadowRoot,
+	props?: {
+		editMode: boolean
+	}
+}) => ATypedSvelteComponent
+
 export type Theme = {
 	Layout: ConstructorOfATypedSvelteComponent;
 	pages: {
-		home: ConstructorOfATypedSvelteComponent;
-		[id: string]: ConstructorOfATypedSvelteComponent;
+		home: Page;
+		[id: string]: Page;
 	};
 };
 
