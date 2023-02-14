@@ -5,8 +5,6 @@
 	import type { IndianSite } from '..';
 	import Quote from '../components/icons/Quote.svg';
 
-	export let editMode: boolean;
-
 	const site = $siteStore as IndianSite;
 
 	const images = site.pages.home.images;
@@ -47,10 +45,10 @@
 	<div class="container pt-40 lg:pb-40 lg:relative grid lg:grid-cols-2 gap-8">
 		<div class="flex flex-col justify-center lg:pr-8">
 			<h1 class="font-heading font-bold text-4xl md:text-5xl mb-4">
-				<Text {editMode} id="heroHeading" />
+				<Text id="heroHeading" />
 			</h1>
 			<p>
-				<Text {editMode} id="heroText" />
+				<Text id="heroText" />
 			</p>
 
 			<a
@@ -80,10 +78,10 @@
 	<div class="container py-16 flex flex-col items-center text-center text-white">
 		<div class="flex flex-col justify-center">
 			<h2 class="font-heading font-bold text-4xl mb-4">
-				<Text {editMode} id="aboutHeading" />
+				<Text id="aboutHeading" />
 			</h2>
 			<p>
-				<Text {editMode} id="aboutText" />
+				<Text id="aboutText" />
 			</p>
 
 			<div class="flex items-center justify-center gap-4 mt-6">
@@ -115,7 +113,7 @@
 		<img class="-z-10 absolute -top-12 -left-16 h-36" src={Quote} alt="" />
 
 		<h2 class="text-4xl font-heading font-bold">
-			<Text {editMode} id="reviewsHeading" />
+			<Text id="reviewsHeading" />
 		</h2>
 	</div>
 

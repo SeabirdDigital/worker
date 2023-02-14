@@ -1,8 +1,7 @@
 <script lang="ts">
+	import editMode from '$lib/stores/editMode';
 	import pageId from '$lib/stores/pageId';
 	import site from '$lib/stores/site';
-
-	export let editMode = false;
 
 	export let id: string | string[];
 
@@ -16,6 +15,6 @@
 	}
 </script>
 
-<span class="block" data-seabird-id={id} contenteditable={editMode}>
+<span class="block" data-puffins-editable={id} contenteditable={$editMode}>
 	{@html text}
 </span>

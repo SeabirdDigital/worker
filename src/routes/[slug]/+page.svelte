@@ -18,5 +18,5 @@
 </svelte:head>
 
 <Layout>
-	<Page editMode={false} />
+	<Page />
 </Layout>
