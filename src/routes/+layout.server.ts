@@ -53,5 +53,4 @@ export const load: LayoutServerLoad = async (data) => {
 		return { currentSite };
 	}
 
-	throw error(404, 'Not found');
 };
