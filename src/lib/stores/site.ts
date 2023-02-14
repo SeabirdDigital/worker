@@ -13,13 +13,12 @@ type DefaultMap = {
 	[id: string]: string;
 };
 
-export type Site<
+export type FireStoreSite<
 	Pages = PagesDefault,
 	GlobalImages = DefaultMap,
 	Links = DefaultMap,
 	Colors = DefaultMap
 > = {
-	id: string;
 	siteData: SiteData;
 	pages: Pages;
 	data?: {
@@ -41,6 +40,18 @@ export type Site<
 		}[];
 	};
 };
+
+export type Site<
+	Pages = PagesDefault,
+	GlobalImages = DefaultMap,
+	Links = DefaultMap,
+	Colors = DefaultMap
+> = FireStoreSite<
+	Pages,
+	GlobalImages,
+	Links,
+	Colors
+> & { id: string }
 
 export type SiteData = {
 	siteName: string;

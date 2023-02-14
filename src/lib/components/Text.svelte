@@ -16,6 +16,6 @@
 	}
 </script>
 
-<span class="block" data-seabird-id={id} contenteditable={editMode}>
+<span class="block" data-puffins-editable={id} contenteditable={editMode}>
 	{@html text}
 </span>

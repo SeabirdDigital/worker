@@ -43,10 +43,8 @@ export const load: LayoutServerLoad = async (data) => {
 
 		currentSite.siteData.ico = await getImage(currentSite, currentSite.siteData.ico);
 
-		console.log(currentSite)
 		return {
-			currentSite,
-			pageId
+			currentSite
 		};
 	}
 	if (pathname.startsWith("/portal")) {
