@@ -1,35 +1,21 @@
-<script lang="ts">
-	import { page } from '$app/stores';
-	import firebase, { database } from '$lib/firebase';
+<script>
 	import pageId from '$lib/stores/pageId';
-	import site, { type FireStoreSite } from '$lib/stores/site';
+	import site from '$lib/stores/site';
 	import theme from '$lib/stores/theme';
-	import firestore, { doc, getDoc, updateDoc } from 'firebase/firestore';
 
 	const Page = $theme.pages[$pageId];
 
 	const Layout = $theme.Layout;
-
-	const onSave = async () => {
-		const editables = document.querySelectorAll<HTMLElement>('[data-puffins-editable]');
-
-		let newData: { [key: string]: string } = {};
-		editables.forEach((e) => {
-			newData[e.dataset.puffinsEditable!] = e.innerHTML;
-		});
-
-		const newSite: FireStoreSite | undefined = (
-			await getDoc(doc(database, 'sites', $site.id))
-		).data() as FireStoreSite;
-		newSite.pages[$pageId] = {
-			...newSite.pages[$page.params.slug],
-			...newData,
-			images: newSite.pages[$pageId].images
-		};
-
-		await updateDoc(doc(database, 'sites', $site.id), newSite);
-	};
 </script>
+
+<svelte:head>
+	<link rel="icon" href={$site.siteData.ico} />
+
+	<title>
+		{$site.siteData.siteName}
+		{$site.siteData.tagline ? ` | ${$site.siteData.tagline}` : ''}
+	</title>
+</svelte:head>
 
 <div class="flex">
 	<div class="w-[14rem]">
@@ -83,9 +69,7 @@
 				unde voluptatum amet commodi iure illum accusantium molestias distinctio, laborum magnam a?
 			</div>
 			<div class="w-full flex">
-				<button on:click={onSave} class="flex-1 mx-2 py-4 mb-2 bg-sky-500 rounded-lg">
-					Save
-				</button>
+				<button class="flex-1 mx-2 py-4 mb-2 bg-sky-500 rounded-lg">Save</button>
 			</div>
 		</div>
 	</div>
