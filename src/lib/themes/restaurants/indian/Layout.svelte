@@ -2,8 +2,9 @@
 	import './IndianRestaurant.css';
 
 	import siteStore from '$lib/stores/site';
+	import theme from '$lib/stores/theme';
 	import { onMount } from 'svelte';
-	import { DefaultIndianColors, type IndianSite } from '.';
+	import { IndianRestaurant, type IndianSite } from '.';
 
 	onMount(() => {
 		// @ts-ignore
@@ -28,8 +29,9 @@
 
 <div
 	class="font-text relative"
-	style="--rh-primary: {colors?.primary ?? DefaultIndianColors.primary}; --rh-dark: {colors?.dark ??
-		DefaultIndianColors.dark};"
+	style="--rh-primary: {colors?.primary ??
+		IndianRestaurant.defaults.colors.primary}; --rh-dark: {colors?.dark ??
+		IndianRestaurant.defaults.colors.dark};"
 >
 	<slot />
 </div>

@@ -4,13 +4,13 @@ import Layout from './Layout.svelte';
 import Home from './pages/home.svelte';
 
 export type IndianSite = Site<
-	typeof DefaultIndianPages,
-	typeof DefaultIndianGlobalImages,
-	typeof DefaultIndianLinks,
-	typeof DefaultIndianColors
+	typeof DefaultPages,
+	typeof DefaultGlobalImages,
+	typeof DefaultLinks,
+	typeof DefaultColors
 >;
 
-export const DefaultIndianPages = {
+const DefaultPages = {
 	home: {
 		images: {
 			hero: 'hero.jpg',
@@ -30,30 +30,35 @@ export const DefaultIndianPages = {
 	}
 };
 
-export const DefaultIndianGlobalImages = {
+const DefaultGlobalImages = {
 	logo: 'logo.png'
 };
 
-export const DefaultIndianLinks = {
+const DefaultLinks = {
 	map: 'https://maps.google.com',
 	menu: 'https://tabsquare.ai',
 	foodora: 'https://foodora.se'
 };
 
-export const DefaultIndianColors = {
+const DefaultColors = {
 	primary: '#B30C47',
 	dark: '#1E1323'
 };
 
-export const IndianRestaurant: Theme = {
+export const IndianRestaurant: Theme<
+	typeof DefaultPages,
+	typeof DefaultGlobalImages,
+	typeof DefaultLinks,
+	typeof DefaultColors
+> = {
 	Layout,
 	pages: {
 		home: Home
 	},
 	defaults: {
-		pages: DefaultIndianPages,
-		globalImages: DefaultIndianGlobalImages,
-		links: DefaultIndianLinks,
-		colors: DefaultIndianColors
+		pages: DefaultPages,
+		globalImages: DefaultGlobalImages,
+		links: DefaultLinks,
+		colors: DefaultColors
 	}
 };
