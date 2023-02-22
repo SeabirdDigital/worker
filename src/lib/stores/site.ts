@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-type PagesDefault = {
+export type PagesDefault = {
 	[pageId: string]: {
 		images?: {
 			[imageId: string]: string;
@@ -9,7 +9,7 @@ type PagesDefault = {
 	};
 };
 
-type DefaultMap = {
+export type DefaultMap = {
 	[id: string]: string;
 };
 
