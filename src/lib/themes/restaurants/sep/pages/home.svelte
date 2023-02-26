@@ -19,15 +19,14 @@
 	style="background-image: url({images.hero});"
 >
 	<div
-		class="h-full w-1/2 flex flex-col justify-center items-center text-center text-gray-100 gap-8"
+		class="h-full w-1/2 max-w-2xl flex flex-col justify-center items-center text-center text-gray-100 gap-8"
 	>
 		<div class="flex flex-col items-center gap-4">
-			<h1>{site.siteData.tagline}</h1>
-			<h2 class="text-6xl text-sr-primary font-heading uppercase font-bold">
+			<h1 class="text-6xl xl:text-8xl text-sr-primary font-heading uppercase font-bold">
 				<span class="table-caption">
 					{site.siteData.siteName}
 				</span>
-			</h2>
+			</h1>
 
 			<p class="w-[75%]">
 				<Text id="heroText" />
