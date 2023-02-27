@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { database } from '$lib/firebase';
+	import { auth, database } from '$lib/firebase';
 	import editMode from '$lib/stores/editMode';
 	import pageId from '$lib/stores/pageId';
 	import signedIn from '$lib/stores/signedIn';
@@ -43,7 +43,9 @@
 <div class="flex">
 	<div class="w-[14rem]">
 		<div class="flex flex-col fixed w-[14rem] h-screen border-r">
-			<div>Signed In: {$signedIn}</div>
+			<div>
+				Signed In: {$signedIn}. Clearance: {$site.siteData.users[auth.currentUser?.uid ?? '']}
+			</div>
 			<div class="flex-1 overflow-y-scroll px-2">
 				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit velit fuga eveniet
 				voluptatibus maiores corrupti sapiente earum at unde voluptatum amet commodi iure illum

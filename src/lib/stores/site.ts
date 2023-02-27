@@ -48,6 +48,9 @@ export type SiteData = {
 	hosts: string[];
 	theme: string;
 	ico: string;
+	users: {
+		[uuid: string]: number
+	}
 };
 
 const site = writable<Site>();
