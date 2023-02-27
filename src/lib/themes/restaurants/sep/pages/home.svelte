@@ -14,26 +14,32 @@
 	const colors = site.data?.colors;
 </script>
 
+<div class="absolute top-0 w-full">
+<div class="container my-6">
+	<img class="h-16" src={globalImages?.logo} alt="">
+</div>
+</div>
+
 <div
-	class="h-screen border-8 border-sr-primary bg-cover bg-center bg-black/40 bg-blend-darken flex justify-center"
+	class="h-screen border-8 border-sr-primary bg-cover bg-center bg-black/50 bg-blend-darken flex justify-center"
 	style="background-image: url({images.hero});"
 >
 	<div
-		class="h-full w-1/2 max-w-2xl flex flex-col justify-center items-center text-center text-gray-100 gap-8"
+		class="h-screen w-3/4 md:w-1/2 max-w-2xl flex flex-col justify-center items-center text-center text-gray-100 gap-8"
 	>
 		<div class="flex flex-col items-center gap-4">
-			<h1 class="text-6xl xl:text-8xl text-sr-primary font-heading uppercase font-bold">
+			<h1 class="text-6xl md:text-7xl xl:text-8xl text-sr-primary font-heading uppercase font-bold">
 				<span class="table-caption">
 					{site.siteData.siteName}
 				</span>
 			</h1>
 
-			<p class="w-[75%]">
+			<p class="md:w-3/4">
 				<Text id="heroText" />
 			</p>
 		</div>
 
-		<div class="w-full flex justify-between">
+		<div class="w-full flex flex-col md:flex-row justify-between gap-6">
 			<button class="uppercase border-y-2 border-sr-primary px-8 py-3">Beställ online</button>
 			<button class="uppercase border-y-2 border-sr-primary px-8 py-3">Våra menyer</button>
 		</div>
@@ -41,12 +47,12 @@
 </div>
 
 <div class="bg-sr-dark">
-	<div class="container grid grid-cols-2 gap-12 py-24">
+	<div class="container flex flex-col-reverse md:grid grid-cols-2 gap-12 py-24">
 		<div class="flex justify-end">
 			<img src={images.about} alt="" />
 		</div>
 
-		<div class="flex flex-col justify-center gap-4">
+		<div class="flex flex-col justify-center gap-4 text-center md:text-left">
 			<h2 class="text-4xl text-sr-primary font-heading uppercase font-bold">
 				<Text id="aboutHeading" />
 			</h2>
@@ -79,10 +85,10 @@
 </div>
 
 <div class="relative bg-sr-primary">
-	<div class="container grid grid-cols-2 gap-16">
+	<div class="container md:grid grid-cols-2 gap-16">
 		<div>
 			<img
-				class="absolute left-0 w-1/2 h-full object-cover object-center"
+				class="hidden md:block absolute left-0 w-1/2 h-full object-cover object-center"
 				src={images.order}
 				alt=""
 			/>
