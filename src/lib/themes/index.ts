@@ -2,6 +2,7 @@ import type { DefaultMap, PagesDefault } from '$lib/stores/site';
 import { IndianRestaurant } from './restaurants/indian';
 import { ItalianRestaurant } from './restaurants/italian';
 import { JapaneseRestaurant } from './restaurants/japanese';
+import { KingRestaurant } from './restaurants/king';
 import { SepRestaurant } from './restaurants/sep';
 
 export type Theme<
@@ -27,7 +28,8 @@ const themes: { [id: string]: Theme } = {
 	IndianRestaurant,
 	ItalianRestaurant,
 	JapaneseRestaurant,
-	SepRestaurant
+	SepRestaurant,
+	KingRestaurant
 };
 
 export default themes;
