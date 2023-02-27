@@ -3,7 +3,7 @@ import type { Theme } from '$lib/themes';
 import Layout from './Layout.svelte';
 import Home from './pages/home.svelte';
 
-export type IndianSite = Site<
+export type SepSite = Site<
 	typeof DefaultPages,
 	typeof DefaultGlobalImages,
 	typeof DefaultLinks,
@@ -18,7 +18,6 @@ const DefaultPages = {
 			order: 'order.jpg'
 		},
 
-		heroHeading: 'Den bästa<br/>indiska maten',
 		heroText:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit libero modi tempore magnam sit perferendis veniam doloremque ea sequi ipsum impedit voluptatibus, inventore repudiandae vero, dicta nam laudantium quae distinctio.',
 
@@ -45,7 +44,7 @@ const DefaultColors = {
 	dark: '#1E1323'
 };
 
-export const IndianRestaurant: Theme<
+export const SepRestaurant: Theme<
 	typeof DefaultPages,
 	typeof DefaultGlobalImages,
 	typeof DefaultLinks,

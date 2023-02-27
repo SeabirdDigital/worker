@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { scrollRef, scrollTo, scrollTop } from 'svelte-scrolling';
 
 	import ContactText from '$lib/components/ContactText.svelte';
@@ -9,25 +9,28 @@
 	import Star from '../components/icons/Star.svg';
 
 	import pageId from '$lib/stores/pageId';
-	import site from '$lib/stores/site';
+	import siteStore from '$lib/stores/site';
+	import type { ItalianSite } from '..';
 
-	const images = $site.pages[$pageId].images;
-	const globalImages = $site.data?.images;
+	const site = $siteStore as ItalianSite;
 
-	const links = $site.data?.links;
+	const images = site.pages.home.images;
+	const globalImages = site.data?.images;
+
+	const links = site.data?.links;
 </script>
 
 <div class="h-screen w-full flex flex-col">
 	<div class="flex">
 		<div
 			class="h-full w-[15vw] min-w-[96px] flex justify-center items-center"
-			style="background-color: {$site.data?.colors?.['primary']};"
+			style="background-color: {site.data?.colors?.['primary']};"
 		>
 			{#if globalImages?.logo}
 				<img height="64px" width="64px" src={globalImages?.logo} alt="Logo" />
 			{:else}
 				<span class="text-center font-nunito font-bold 2xl:text-3xl">
-					{$site.siteData.siteName}
+					{site.siteData.siteName}
 				</span>
 			{/if}
 		</div>
@@ -42,7 +45,7 @@
 				<ContactText type="address" />
 			</a>
 			<a
-				href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}
+				href={'tel:' + site.data?.contact?.phone?.replace(/\s/g, '')}
 				class="border-l bg-gray-50 text-gray-800 h-full px-8 py-6 flex items-center"
 			>
 				<span class="block sm:hidden">Ring</span>
@@ -77,7 +80,7 @@
 					<a href={links?.['menu']}>
 						<button
 							class="text-white 2xl:text-lg py-3 px-4"
-							style="background-color: {$site.data?.colors?.['primary']};"
+							style="background-color: {site.data?.colors?.['primary']};"
 						>
 							Se Menyn
 						</button>
@@ -134,8 +137,8 @@
 		</div>
 
 		<div class="md:flex text-md text-center container" id="reviews">
-			{#if $site.data?.reviews}
-				{#each $site.data.reviews as review}
+			{#if site.data?.reviews}
+				{#each site.data.reviews as review}
 					<div>
 						<p>
 							{@html review.message}
@@ -151,7 +154,7 @@
 <div class="flex">
 	<div
 		class="flex flex-col lg:flex-row gap-4 justify-between flex-grow pl-[15%] px-8 py-12 bg-cover bg-center text-white"
-		style="background-image: url({images?.italia});"
+		style="background-image: url({images?.order});"
 	>
 		<div>
 			<h2 class="text-4xl md:text-4xl 2xl:text-5xl font-lora">
@@ -163,7 +166,7 @@
 		</div>
 
 		<div class="flex flex-col-reverse md:flex-row gap-3 md:gap-6">
-			<a href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}>
+			<a href={'tel:' + site.data?.contact?.phone?.replace(/\s/g, '')}>
 				<button
 					class="flex items-center h-full p-4 text-xl leading-none border-2 border-white gap-3"
 				>
@@ -204,16 +207,16 @@
 					<img height="64px" width="64px" src={globalImages?.logo} alt="Logo" />
 				{:else}
 					<span class="text-center font-nunito font-bold 2xl:text-3xl">
-						{$site.siteData.siteName}
+						{site.siteData.siteName}
 					</span>
 				{/if}
 			</div>
 
 			<div class="col-span-2 flex flex-col md:flex-row relative gap-4">
 				<div class="md:w-1/2 px-4 flex flex-col gap-2">
-					{#if $site.data?.openingHours}
+					{#if site.data?.openingHours}
 						<h3 class="text-lg font-lora font-semibold">Öppettider</h3>
-						{#each $site.data.openingHours as day}
+						{#each site.data.openingHours as day}
 							<div class="flex justify-between">
 								<span>{day.weekday}</span>
 								<span class="text-right">{day.time}</span>
@@ -225,21 +228,21 @@
 					<h3 class="text-lg font-lora font-semibold">Hör av dig!</h3>
 					<div class="flex justify-between">
 						<span>Email</span>
-						<a class="text-right" href={'mailto:' + $site.data?.contact?.email}>
+						<a class="text-right" href={'mailto:' + site.data?.contact?.email}>
 							<ContactText type="email" />
 						</a>
 					</div>
 
 					<div class="flex justify-between">
 						<span>Telefon</span>
-						<a class="text-right" href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}>
+						<a class="text-right" href={'tel:' + site.data?.contact?.phone?.replace(/\s/g, '')}>
 							<ContactText type="phone" />
 						</a>
 					</div>
 
 					<div class="flex md:hidden justify-between">
 						<span>Adress</span>
-						<a class="text-right" href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}>
+						<a class="text-right" href={'tel:' + site.data?.contact?.phone?.replace(/\s/g, '')}>
 							<ContactText type="address" />
 						</a>
 					</div>

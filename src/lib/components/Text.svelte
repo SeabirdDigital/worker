@@ -2,17 +2,11 @@
 	import editMode from '$lib/stores/editMode';
 	import pageId from '$lib/stores/pageId';
 	import site from '$lib/stores/site';
+	import theme from '$lib/stores/theme';
 
-	export let id: string | string[];
+	export let id: string;
 
-	if (typeof id == 'string') id = id.split('.');
-
-	let text = $site.pages[$pageId][id[0]];
-	for (let i = 0; i < id.length; i++) {
-		if (typeof text != 'object') break;
-
-		text = text[id[i]];
-	}
+	let text = $site.pages[$pageId][id] ?? $theme.defaults.pages[$pageId][id];
 </script>
 
 <span class="block" data-puffins-editable={id} contenteditable={$editMode}>

@@ -1,17 +1,16 @@
 <script lang="ts">
-	import './IndianRestaurant.css';
+	import './SepRestaurant.css';
 
 	import siteStore from '$lib/stores/site';
-	import theme from '$lib/stores/theme';
 	import { onMount } from 'svelte';
-	import { IndianRestaurant, type IndianSite } from '.';
+	import { SepRestaurant, type SepSite } from '.';
 
 	onMount(() => {
 		// @ts-ignore
 		AOS.init();
 	});
 
-	const site = $siteStore as IndianSite;
+	const site = $siteStore as SepSite;
 	const colors = site.data?.colors;
 </script>
 
@@ -29,9 +28,9 @@
 
 <div
 	class="font-text relative"
-	style="--rh-primary: {colors?.primary ??
-		IndianRestaurant.defaults.colors.primary}; --rh-dark: {colors?.dark ??
-		IndianRestaurant.defaults.colors.dark};"
+	style="--sr-primary: {colors?.primary ??
+		SepRestaurant.defaults.colors.primary}; --sr-dark: {colors?.dark ??
+		SepRestaurant.defaults.colors.dark};"
 >
 	<slot />
 </div>

@@ -28,28 +28,24 @@ export const load: LayoutServerLoad = async (data) => {
 		if (currentSite) break;
 	}
 
-	const pathname = data.url.pathname
-	const pageId = pathname == "/" ? "home" : pathname.substring(1).replace("portal/edit/", "");
+	const pathname = data.url.pathname;
+	const pageId = pathname == '/' ? 'home' : pathname.substring(1).replace('portal/edit/', '');
 
 	if (currentSite?.pages[pageId]) {
 		currentSite.data = {
 			...currentSite.data,
 			images: await getImages(currentSite)
 		};
-		currentSite.pages[pageId].images = await getImages(
-			currentSite,
-			pageId
-		);
+		currentSite.pages[pageId].images = await getImages(currentSite, pageId);
 
 		currentSite.siteData.ico = await getImage(currentSite, currentSite.siteData.ico);
 
-		console.log(currentSite)
 		return {
 			currentSite,
 			pageId
 		};
 	}
-	if (pathname.startsWith("/portal")) {
+	if (pathname.startsWith('/portal')) {
 		return { currentSite };
 	}
 
