@@ -2,7 +2,7 @@
 	import Text from '$lib/components/Text.svelte';
 	import siteStore from '$lib/stores/site';
 	import { SepRestaurant } from '..';
-	import type { RestaurantSite } from '../..';
+	import { RestaurantDefaults, type RestaurantSite } from '../..';
 
 	const site = $siteStore as RestaurantSite;
 
@@ -10,9 +10,9 @@
 	const globalImages = site.data?.images;
 
 	const links = site.data?.links;
-	const reviews = site.data?.reviews ?? SepRestaurant.defaults.data.reviews;
-	const contact = site.data?.contact ?? SepRestaurant.defaults.data.contact;
-	const openingHours = site.data?.openingHours ?? SepRestaurant.defaults.data.openingHours;
+	const reviews = site.data?.reviews ?? RestaurantDefaults.data.reviews;
+	const contact = site.data?.contact ?? RestaurantDefaults.data.contact;
+	const openingHours = site.data?.openingHours ?? RestaurantDefaults.data.openingHours;
 </script>
 
 <div class="absolute top-0 w-full">

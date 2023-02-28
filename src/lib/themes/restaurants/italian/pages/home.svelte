@@ -10,7 +10,7 @@
 	import pageId from '$lib/stores/pageId';
 	import siteStore from '$lib/stores/site';
 	import { ItalianRestaurant } from '..';
-	import type { RestaurantSite } from '../..';
+	import { RestaurantDefaults, type RestaurantSite } from '../..';
 
 	const site = $siteStore as RestaurantSite;
 
@@ -18,9 +18,9 @@
 	const globalImages = site.data?.images;
 
 	const links = site.data?.links;
-	const reviews = site.data?.reviews ?? ItalianRestaurant.defaults.data.reviews;
-	const contact = site.data?.contact ?? ItalianRestaurant.defaults.data.contact;
-	const openingHours = site.data?.openingHours ?? ItalianRestaurant.defaults.data.openingHours;
+	const reviews = site.data?.reviews ?? RestaurantDefaults.data.reviews;
+	const contact = site.data?.contact ?? RestaurantDefaults.data.contact;
+	const openingHours = site.data?.openingHours ?? RestaurantDefaults.data.openingHours;
 </script>
 
 <div class="h-screen w-full flex flex-col">

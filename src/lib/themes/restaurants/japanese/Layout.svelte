@@ -1,7 +1,6 @@
 <script lang="ts">
 	import siteStore from '$lib/stores/site';
-	import { JapaneseRestaurant } from '.';
-	import type { RestaurantSite } from '..';
+	import { RestaurantDefaults, type RestaurantSite } from '..';
 	import './JapaneseRestaurant.css';
 
 	const site = $siteStore as RestaurantSite;
@@ -19,8 +18,8 @@
 
 <main
 	class="bg-zinc-900 text-[#fef7ec] font-nunito text-lg"
-	style="--puffin-primary: {colors?.primary ?? JapaneseRestaurant.defaults.colors.primary};
---puffin-dark: {colors?.dark ?? JapaneseRestaurant.defaults.colors.dark};"
+	style="--puffin-primary: {colors?.primary ?? RestaurantDefaults.colors.primary};
+--puffin-dark: {colors?.dark ?? RestaurantDefaults.colors.dark};"
 >
 	<slot />
 </main>

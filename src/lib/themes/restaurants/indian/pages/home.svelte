@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Text from '$lib/components/Text.svelte';
 	import siteStore from '$lib/stores/site';
-	import { IndianRestaurant } from '..';
-	import type { RestaurantSite } from '../..';
+	import { RestaurantDefaults, type RestaurantSite } from '../..';
 	import Quote from '../components/icons/Quote.svg';
 
 	const site = $siteStore as RestaurantSite;
@@ -11,9 +10,9 @@
 	const globalImages = site.data?.images;
 
 	const links = site.data?.links;
-	const reviews = site.data?.reviews ?? IndianRestaurant.defaults.data.reviews;
-	const contact = site.data?.contact ?? IndianRestaurant.defaults.data.contact;
-	const openingHours = site.data?.openingHours ?? IndianRestaurant.defaults.data.openingHours;
+	const reviews = site.data?.reviews ?? RestaurantDefaults.data.reviews;
+	const contact = site.data?.contact ?? RestaurantDefaults.data.contact;
+	const openingHours = site.data?.openingHours ?? RestaurantDefaults.data.openingHours;
 </script>
 
 <div class="z-50 absolute w-full">

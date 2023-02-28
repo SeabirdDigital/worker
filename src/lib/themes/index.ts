@@ -5,25 +5,26 @@ import { JapaneseRestaurant } from './restaurants/japanese';
 import { KingRestaurant } from './restaurants/king';
 import { SepRestaurant } from './restaurants/sep';
 
-export type Theme<
+export type Theme = {
+	Layout: ConstructorOfATypedSvelteComponent;
+	pages: {
+		home: ConstructorOfATypedSvelteComponent;
+		[id: string]: ConstructorOfATypedSvelteComponent;
+	};
+};
+
+export type Defaults<
 	Pages = PagesDefault,
 	GlobalImages = DefaultMap,
 	Links = DefaultMap,
 	Colors = DefaultMap,
 	Data = unknown
 > = {
-	Layout: ConstructorOfATypedSvelteComponent;
-	pages: {
-		home: ConstructorOfATypedSvelteComponent;
-		[id: string]: ConstructorOfATypedSvelteComponent;
-	};
-	defaults: {
-		pages: Pages;
-		globalImages: GlobalImages;
-		links: Links;
-		colors: Colors;
-		data: Data;
-	};
+	pages: Pages;
+	globalImages: GlobalImages;
+	links: Links;
+	colors: Colors;
+	data: Data;
 };
 
 const themes: { [id: string]: Theme } = {

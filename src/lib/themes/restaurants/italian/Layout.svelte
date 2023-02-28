@@ -1,7 +1,7 @@
 <script lang="ts">
 	import siteStore from '$lib/stores/site';
 	import { ItalianRestaurant } from '.';
-	import type { RestaurantSite } from '..';
+	import { RestaurantDefaults, type RestaurantSite } from '..';
 	import './ItalianRestaurant.css';
 
 	const site = $siteStore as RestaurantSite;
@@ -20,8 +20,8 @@
 <main
 	class="font-nunito"
 	style="--puffin-primary: {colors?.primary ??
-		ItalianRestaurant.defaults.colors.primary}; --puffin-dark: {colors?.dark ??
-		ItalianRestaurant.defaults.colors.dark};"
+		RestaurantDefaults.colors.primary}; --puffin-dark: {colors?.dark ??
+		RestaurantDefaults.colors.dark};"
 >
 	<slot />
 </main>

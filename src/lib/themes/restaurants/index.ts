@@ -1,5 +1,5 @@
 import type { Site } from '$lib/stores/site';
-import type { Theme } from '..';
+import type { Defaults, Theme } from '..';
 
 type Review = {
 	author: string;
@@ -88,15 +88,15 @@ export type RestaurantSite = Site<
 	RestaurantData
 >;
 
-export type RestaurantTheme = Theme<
+export type RestaurantTheme = Theme;
+
+export const RestaurantDefaults: Defaults<
 	typeof DefaultPages,
 	typeof DefaultGlobalImages,
 	typeof DefaultLinks,
 	typeof DefaultColors,
 	typeof DefaultData
->;
-
-export const RestaurantDefaults: RestaurantTheme['defaults'] = {
+> = {
 	pages: DefaultPages,
 	globalImages: DefaultGlobalImages,
 	links: DefaultLinks,

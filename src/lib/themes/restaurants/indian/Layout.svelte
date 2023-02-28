@@ -3,8 +3,7 @@
 
 	import siteStore from '$lib/stores/site';
 	import { onMount } from 'svelte';
-	import { IndianRestaurant } from '.';
-	import type { RestaurantSite } from '..';
+	import { RestaurantDefaults, type RestaurantSite } from '..';
 
 	onMount(() => {
 		// @ts-ignore
@@ -30,8 +29,8 @@
 <div
 	class="font-text relative"
 	style="--puffin-primary: {colors?.primary ??
-		IndianRestaurant.defaults.colors.primary}; --puffin-dark: {colors?.dark ??
-		IndianRestaurant.defaults.colors.dark};"
+		RestaurantDefaults.colors.primary}; --puffin-dark: {colors?.dark ??
+		RestaurantDefaults.colors.dark};"
 >
 	<slot />
 </div>
