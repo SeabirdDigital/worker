@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { scrollRef, scrollTo, scrollTop } from 'svelte-scrolling';
 
-	import ContactText from '$lib/components/ContactText.svelte';
 	import Text from '$lib/components/Text.svelte';
 	import ArrowDown from '../components/icons/ArrowDown.svg';
 	import ChevronRight from '../components/icons/ChevronRight.svg';
@@ -10,22 +9,23 @@
 
 	import pageId from '$lib/stores/pageId';
 	import siteStore from '$lib/stores/site';
-	import type { ItalianSite } from '..';
+	import { ItalianRestaurant } from '..';
+	import type { RestaurantSite } from '../..';
 
-	const site = $siteStore as ItalianSite;
+	const site = $siteStore as RestaurantSite;
 
 	const images = site.pages.home.images;
 	const globalImages = site.data?.images;
 
 	const links = site.data?.links;
+	const reviews = site.data?.reviews ?? ItalianRestaurant.defaults.data.reviews;
+	const contact = site.data?.contact ?? ItalianRestaurant.defaults.data.contact;
+	const openingHours = site.data?.openingHours ?? ItalianRestaurant.defaults.data.openingHours;
 </script>
 
 <div class="h-screen w-full flex flex-col">
 	<div class="flex">
-		<div
-			class="h-full w-[15vw] min-w-[96px] flex justify-center items-center"
-			style="background-color: {site.data?.colors?.['primary']};"
-		>
+		<div class="bg-puffin-primary h-full w-[15vw] min-w-[96px] flex justify-center items-center">
 			{#if globalImages?.logo}
 				<img height="64px" width="64px" src={globalImages?.logo} alt="Logo" />
 			{:else}
@@ -42,14 +42,14 @@
 				href={links?.['map']}
 				class="hidden md:flex items-center px-8 py-6 text-gray-800 whitespace-nowrap"
 			>
-				<ContactText type="address" />
+				{@html contact?.address}
 			</a>
 			<a
-				href={'tel:' + site.data?.contact?.phone?.replace(/\s/g, '')}
+				href={'tel:' + contact?.phone?.replace(/\s/g, '')}
 				class="border-l bg-gray-50 text-gray-800 h-full px-8 py-6 flex items-center"
 			>
 				<span class="block sm:hidden">Ring</span>
-				<span class="hidden sm:block"><ContactText type="phone" /> </span>
+				<span class="hidden sm:block">{contact?.phone} </span>
 				<img class="h-6" src={ChevronRight} alt="" />
 			</a>
 		</div>
@@ -78,12 +78,7 @@
 
 				<div class="flex items-center gap-6">
 					<a href={links?.['menu']}>
-						<button
-							class="text-white 2xl:text-lg py-3 px-4"
-							style="background-color: {site.data?.colors?.['primary']};"
-						>
-							Se Menyn
-						</button>
+						<button class="bg-puffin-primary text-white 2xl:text-lg py-3 px-4"> Se Menyn </button>
 					</a>
 
 					<a href={links?.['map']}>
@@ -137,16 +132,14 @@
 		</div>
 
 		<div class="md:flex text-md text-center container" id="reviews">
-			{#if site.data?.reviews}
-				{#each site.data.reviews as review}
-					<div>
-						<p>
-							{@html review.message}
-						</p>
-						<span>{review.author}</span>
-					</div>
-				{/each}
-			{/if}
+			{#each reviews as review}
+				<div>
+					<p>
+						{@html review.message}
+					</p>
+					<span>{review.author}</span>
+				</div>
+			{/each}
 		</div>
 	</div>
 </div>
@@ -166,7 +159,7 @@
 		</div>
 
 		<div class="flex flex-col-reverse md:flex-row gap-3 md:gap-6">
-			<a href={'tel:' + site.data?.contact?.phone?.replace(/\s/g, '')}>
+			<a href={'tel:' + contact?.phone?.replace(/\s/g, '')}>
 				<button
 					class="flex items-center h-full p-4 text-xl leading-none border-2 border-white gap-3"
 				>
@@ -177,7 +170,7 @@
 						/>
 						<path fill="none" d="M0 0h36v36H0z" />
 					</svg>
-					<ContactText type="phone" />
+					{contact?.phone}
 				</button>
 			</a>
 			<a href={links?.['foodora']}>
@@ -214,36 +207,34 @@
 
 			<div class="col-span-2 flex flex-col md:flex-row relative gap-4">
 				<div class="md:w-1/2 px-4 flex flex-col gap-2">
-					{#if site.data?.openingHours}
-						<h3 class="text-lg font-lora font-semibold">Öppettider</h3>
-						{#each site.data.openingHours as day}
-							<div class="flex justify-between">
-								<span>{day.weekday}</span>
-								<span class="text-right">{day.time}</span>
-							</div>
-						{/each}
-					{/if}
+					<h3 class="text-lg font-lora font-semibold">Öppettider</h3>
+					{#each openingHours as day}
+						<div class="flex justify-between">
+							<span>{day.weekday}</span>
+							<span class="text-right">{day.time}</span>
+						</div>
+					{/each}
 				</div>
 				<div class="md:w-1/2 px-4 flex flex-col gap-2">
 					<h3 class="text-lg font-lora font-semibold">Hör av dig!</h3>
 					<div class="flex justify-between">
 						<span>Email</span>
-						<a class="text-right" href={'mailto:' + site.data?.contact?.email}>
-							<ContactText type="email" />
+						<a class="text-right" href={'mailto:' + contact?.email}>
+							{contact?.email}
 						</a>
 					</div>
 
 					<div class="flex justify-between">
 						<span>Telefon</span>
-						<a class="text-right" href={'tel:' + site.data?.contact?.phone?.replace(/\s/g, '')}>
-							<ContactText type="phone" />
+						<a class="text-right" href={'tel:' + contact?.phone?.replace(/\s/g, '')}>
+							{contact?.phone}
 						</a>
 					</div>
 
 					<div class="flex md:hidden justify-between">
 						<span>Adress</span>
-						<a class="text-right" href={'tel:' + site.data?.contact?.phone?.replace(/\s/g, '')}>
-							<ContactText type="address" />
+						<a class="text-right" href={'tel:' + contact?.phone?.replace(/\s/g, '')}>
+							{@html contact?.address}
 						</a>
 					</div>
 				</div>

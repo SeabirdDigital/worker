@@ -9,7 +9,8 @@ export type Theme<
 	Pages = PagesDefault,
 	GlobalImages = DefaultMap,
 	Links = DefaultMap,
-	Colors = DefaultMap
+	Colors = DefaultMap,
+	Data = unknown
 > = {
 	Layout: ConstructorOfATypedSvelteComponent;
 	pages: {
@@ -21,6 +22,7 @@ export type Theme<
 		globalImages: GlobalImages;
 		links: Links;
 		colors: Colors;
+		data: Data;
 	};
 };
 

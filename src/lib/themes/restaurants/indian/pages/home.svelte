@@ -1,16 +1,19 @@
 <script lang="ts">
-	import ContactText from '$lib/components/ContactText.svelte';
 	import Text from '$lib/components/Text.svelte';
 	import siteStore from '$lib/stores/site';
-	import type { IndianSite } from '..';
+	import { IndianRestaurant } from '..';
+	import type { RestaurantSite } from '../..';
 	import Quote from '../components/icons/Quote.svg';
 
-	const site = $siteStore as IndianSite;
+	const site = $siteStore as RestaurantSite;
 
 	const images = site.pages.home.images;
 	const globalImages = site.data?.images;
 
 	const links = site.data?.links;
+	const reviews = site.data?.reviews ?? IndianRestaurant.defaults.data.reviews;
+	const contact = site.data?.contact ?? IndianRestaurant.defaults.data.contact;
+	const openingHours = site.data?.openingHours ?? IndianRestaurant.defaults.data.openingHours;
 </script>
 
 <div class="z-50 absolute w-full">
@@ -26,7 +29,7 @@
 		<div class="flex justify-end items-center">
 			<a
 				href="tel:042121688"
-				class="text-white shadow-hard bg-rh-primary shadow-rh-dark hover:shadow-none duration-200 py-4 px-5 w-fit h-fit flex items-center gap-2"
+				class="text-white shadow-hard bg-puffin-primary shadow-puffin-dark hover:shadow-none duration-200 py-4 px-5 w-fit h-fit flex items-center gap-2"
 			>
 				<svg width="18" height="18" viewBox="0 0 36 36">
 					<path
@@ -53,7 +56,7 @@
 
 			<a
 				href={links?.menu}
-				class="text-white bg-rh-primary py-3 px-5 shadow-hard hover:shadow-none shadow-rh-dark duration-200 w-fit flex items-center gap-2 mt-6"
+				class="text-white bg-puffin-primary py-3 px-5 shadow-hard hover:shadow-none shadow-puffin-dark duration-200 w-fit flex items-center gap-2 mt-6"
 			>
 				Se Menyn
 				<svg class="rotate-90" width="18" height="18" viewBox="0 0 36 36">
@@ -74,7 +77,7 @@
 	</div>
 </div>
 
-<div class="bg-rh-primary">
+<div class="bg-puffin-primary">
 	<div class="container py-16 flex flex-col items-center text-center text-white">
 		<div class="flex flex-col justify-center">
 			<h2 class="font-heading font-bold text-4xl mb-4">
@@ -89,7 +92,7 @@
 					href={links?.menu}
 					target="_blank"
 					rel="noreferrer"
-					class="text-white bg-rh-dark border border-rh-dark py-3 px-5 w-fit flex items-center gap-2"
+					class="text-white bg-puffin-dark border border-puffin-dark py-3 px-5 w-fit flex items-center gap-2"
 				>
 					Beställ online
 				</a>
@@ -122,20 +125,18 @@
 	</div>
 
 	<div class="md:grid grid-cols-3 text-md text-center container text-base" id="reviews">
-		{#if site.data?.reviews}
-			{#each site.data.reviews as review}
-				<div>
-					<p>
-						{@html review.message}
-					</p>
-					<span>{review.author}</span>
-				</div>
-			{/each}
-		{/if}
+		{#each reviews as review}
+			<div>
+				<p>
+					{@html review.message}
+				</p>
+				<span>{review.author}</span>
+			</div>
+		{/each}
 	</div>
 </div>
 
-<div class="relative bg-rh-primary text-white">
+<div class="relative bg-puffin-primary text-white">
 	<div
 		style="background-image: url({images.order});"
 		class="hidden md:block absolute h-full left-0 right-1/2 bg-cover bg-center"
@@ -152,7 +153,7 @@
 			</div>
 
 			<div class="flex flex-col-reverse md:flex-row gap-3 md:gap-4">
-				<a href={'tel:' + site.data?.contact?.phone?.replace(/\s/g, '')}>
+				<a href={'tel:' + contact?.phone?.replace(/\s/g, '')}>
 					<button class="text-white border py-3 px-5 w-fit flex items-center gap-2">
 						<svg width="18" height="18" viewBox="0 0 36 36">
 							<path
@@ -161,12 +162,12 @@
 							/>
 							<path fill="none" d="M0 0h36v36H0z" />
 						</svg>
-						<ContactText type="phone" />
+						{contact?.phone}
 					</button>
 				</a>
 				<a href={links?.['foodora']}>
 					<button
-						class="text-white bg-rh-dark border border-rh-dark py-3 px-5 w-fit flex items-center gap-2 hover:gap-3 duration-150"
+						class="text-white bg-puffin-dark border border-puffin-dark py-3 px-5 w-fit flex items-center gap-2 hover:gap-3 duration-150"
 					>
 						Foodora
 						<svg class="rotate-90" width="18" height="18" viewBox="0 0 36 36">
@@ -183,7 +184,7 @@
 	</div>
 </div>
 
-<footer class="bg-rh-dark text-white">
+<footer class="bg-puffin-dark text-white">
 	<div class="container text-center lg:text-left py-24 grid lg:grid-cols-2 gap-10">
 		<div>
 			<h2 class="font-heading text-3xl mb-2">Kontakt</h2>
@@ -191,29 +192,29 @@
 				<div class="flex flex-col">
 					<h4>Adress:</h4>
 					<a href={links?.map} class="underline hover:no-underline">
-						<ContactText type="address" />
+						{@html contact?.address}
 					</a>
 				</div>
 
 				<div class="flex flex-col">
 					<h4>Telefon:</h4>
-					<a href="tel:042121688" class="underline hover:no-underline"> 042-12 16 88 </a>
+					<a href={'tel:' + contact?.phone} class="underline hover:no-underline">
+						{contact?.phone}
+					</a>
 				</div>
 			</div>
 		</div>
 
 		<div>
-			{#if site.data?.openingHours}
-				<h2 class="font-heading text-3xl mb-2">Öppetider</h2>
-				<div class="grid lg:grid-cols-3 gap-2">
-					{#each site.data.openingHours as day}
-						<div class="flex flex-col">
-							<span>{day.weekday}</span>
-							<span>{day.time}</span>
-						</div>
-					{/each}
-				</div>
-			{/if}
+			<h2 class="font-heading text-3xl mb-2">Öppetider</h2>
+			<div class="grid lg:grid-cols-3 gap-2">
+				{#each openingHours as day}
+					<div class="flex flex-col">
+						<span>{day.weekday}</span>
+						<span>{day.time}</span>
+					</div>
+				{/each}
+			</div>
 		</div>
 	</div>
 

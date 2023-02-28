@@ -2,16 +2,16 @@
 	import './IndianRestaurant.css';
 
 	import siteStore from '$lib/stores/site';
-	import theme from '$lib/stores/theme';
 	import { onMount } from 'svelte';
-	import { IndianRestaurant, type IndianSite } from '.';
+	import { IndianRestaurant } from '.';
+	import type { RestaurantSite } from '..';
 
 	onMount(() => {
 		// @ts-ignore
 		AOS.init();
 	});
 
-	const site = $siteStore as IndianSite;
+	const site = $siteStore as RestaurantSite;
 	const colors = site.data?.colors;
 </script>
 
@@ -29,8 +29,8 @@
 
 <div
 	class="font-text relative"
-	style="--rh-primary: {colors?.primary ??
-		IndianRestaurant.defaults.colors.primary}; --rh-dark: {colors?.dark ??
+	style="--puffin-primary: {colors?.primary ??
+		IndianRestaurant.defaults.colors.primary}; --puffin-dark: {colors?.dark ??
 		IndianRestaurant.defaults.colors.dark};"
 >
 	<slot />

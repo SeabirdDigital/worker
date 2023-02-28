@@ -4,6 +4,10 @@ module.exports = {
 
 	theme: {
 		extend: {
+			colors: {
+				'puffin-primary': 'var(--puffin-primary)',
+				'puffin-dark': 'var(--puffin-dark)'
+			},
 			container: {
 				center: true,
 				padding: '2rem'

@@ -5,8 +5,8 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				'sr-primary': 'var(--sr-primary)',
-				'sr-dark': 'var(--sr-dark)'
+				'puffin-primary': 'var(--puffin-primary)',
+				'puffin-dark': 'var(--puffin-dark)'
 			},
 			container: {
 				center: true,

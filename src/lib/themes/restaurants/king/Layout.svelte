@@ -3,14 +3,15 @@
 
 	import siteStore from '$lib/stores/site';
 	import { onMount } from 'svelte';
-	import { KingRestaurant, type KingSite } from '.';
+	import { KingRestaurant } from '.';
+	import type { RestaurantSite } from '..';
 
 	onMount(() => {
 		// @ts-ignore
 		AOS.init();
 	});
 
-	const site = $siteStore as KingSite;
+	const site = $siteStore as RestaurantSite;
 	const colors = site.data?.colors;
 </script>
 
@@ -28,8 +29,8 @@
 
 <div
 	class="font-text relative xl:text-lg"
-	style="--kr-primary: {colors?.primary ?? KingRestaurant.defaults.colors.primary};
-		--kr-dark: {colors?.dark ?? KingRestaurant.defaults.colors.dark};"
+	style="--puffin-primary: {colors?.primary ?? KingRestaurant.defaults.colors.primary};
+		--puffin-dark: {colors?.dark ?? KingRestaurant.defaults.colors.dark};"
 >
 	<slot />
 </div>

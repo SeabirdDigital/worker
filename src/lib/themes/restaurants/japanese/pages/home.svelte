@@ -1,16 +1,22 @@
-<script>
+<script lang="ts">
 	import { scrollRef, scrollTo, scrollTop } from 'svelte-scrolling';
 
-	import ContactText from '$lib/components/ContactText.svelte';
 	import Text from '$lib/components/Text.svelte';
 
 	import pageId from '$lib/stores/pageId';
-	import site from '$lib/stores/site';
+	import siteStore from '$lib/stores/site';
+	import { JapaneseRestaurant } from '..';
+	import type { RestaurantSite } from '../..';
 
-	const images = $site.pages[$pageId].images;
-	const globalImages = $site.data?.images;
+	const site = $siteStore as RestaurantSite;
 
-	const links = $site.data?.links;
+	const images = site.pages.home.images;
+	const globalImages = site.data?.images;
+
+	const links = site.data?.links;
+	const reviews = site.data?.reviews ?? JapaneseRestaurant.defaults.data.reviews;
+	const contact = site.data?.contact ?? JapaneseRestaurant.defaults.data.contact;
+	const openingHours = site.data?.openingHours ?? JapaneseRestaurant.defaults.data.openingHours;
 </script>
 
 <header class="container flex justify-between h-24 py-6 mb-4">
@@ -22,10 +28,8 @@
 		<a href={links?.map}>
 			<button>Hitta hit</button>
 		</a>
-		<a href={'tel:' + $site.data?.contact?.phone}>
-			<button class="h-fit py-2 px-4" style="background-color: {$site.data?.colors?.primary};">
-				Ring
-			</button>
+		<a href={'tel:' + contact?.phone}>
+			<button class="bg-puffin-primary h-fit py-2 px-4"> Ring </button>
 		</a>
 	</div>
 </header>
@@ -46,9 +50,7 @@
 			</p>
 			<div class="flex items-center gap-4 mt-4">
 				<a href={links?.menu}>
-					<button class="h-fit py-2 px-4" style="background-color: {$site.data?.colors?.primary};">
-						Se menyn
-					</button>
+					<button class="bg-puffin-primary h-fit py-2 px-4"> Se menyn </button>
 				</a>
 
 				<a href={links?.foodora}>
@@ -79,16 +81,14 @@
 		</div>
 
 		<div class="md:flex text-md text-center container" id="reviews">
-			{#if $site.data?.reviews}
-				{#each $site.data.reviews as review}
-					<div class="px-8 flex flex-col gap-4">
-						<p class="text-base">
-							{@html review.message}
-						</p>
-						<span class="font-bold">{review.author}</span>
-					</div>
-				{/each}
-			{/if}
+			{#each reviews as review}
+				<div class="px-8 flex flex-col gap-4">
+					<p class="text-base">
+						{@html review.message}
+					</p>
+					<span class="font-bold">{review.author}</span>
+				</div>
+			{/each}
 		</div>
 	</div>
 </div>
@@ -102,36 +102,34 @@
 
 			<div class="col-span-2 flex flex-col md:flex-row relative gap-4">
 				<div class="md:w-1/2 px-4 flex flex-col gap-2">
-					{#if $site.data?.openingHours}
-						<h3 class="text-lg uppercase">Öppettider</h3>
-						{#each $site.data.openingHours as day}
-							<div class="flex justify-between">
-								<span>{day.weekday}</span>
-								<span class="text-right">{day.time}</span>
-							</div>
-						{/each}
-					{/if}
+					<h3 class="text-lg uppercase">Öppettider</h3>
+					{#each openingHours as day}
+						<div class="flex justify-between">
+							<span>{day.weekday}</span>
+							<span class="text-right">{day.time}</span>
+						</div>
+					{/each}
 				</div>
 				<div class="md:w-1/2 px-4 flex flex-col gap-2">
 					<h3 class="text-lg uppercase">Hör av dig!</h3>
 					<div class="flex justify-between">
 						<span>Email</span>
-						<a class="text-right" href={'mailto:' + $site.data?.contact?.email}>
-							<ContactText type="email" />
+						<a class="text-right" href={'mailto:' + contact?.email}>
+							{contact?.email}
 						</a>
 					</div>
 
 					<div class="flex justify-between">
 						<span>Telefon</span>
-						<a class="text-right" href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}>
-							<ContactText type="phone" />
+						<a class="text-right" href={'tel:' + contact?.phone?.replace(/\s/g, '')}>
+							{contact?.phone}
 						</a>
 					</div>
 
 					<div class="flex md:hidden justify-between">
 						<span>Adress</span>
-						<a class="text-right" href={'tel:' + $site.data?.contact?.phone?.replace(/\s/g, '')}>
-							<ContactText type="address" />
+						<a class="text-right" href={'tel:' + contact?.phone?.replace(/\s/g, '')}>
+							{@html contact?.address}
 						</a>
 					</div>
 				</div>

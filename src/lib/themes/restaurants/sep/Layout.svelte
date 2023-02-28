@@ -3,14 +3,15 @@
 
 	import siteStore from '$lib/stores/site';
 	import { onMount } from 'svelte';
-	import { SepRestaurant, type SepSite } from '.';
+	import { SepRestaurant } from '.';
+	import type { RestaurantSite } from '..';
 
 	onMount(() => {
 		// @ts-ignore
 		AOS.init();
 	});
 
-	const site = $siteStore as SepSite;
+	const site = $siteStore as RestaurantSite;
 	const colors = site.data?.colors;
 </script>
 
@@ -28,8 +29,8 @@
 
 <div
 	class="font-text relative"
-	style="--sr-primary: {colors?.primary ??
-		SepRestaurant.defaults.colors.primary}; --sr-dark: {colors?.dark ??
+	style="--puffin-primary: {colors?.primary ??
+		SepRestaurant.defaults.colors.primary}; --puffin-dark: {colors?.dark ??
 		SepRestaurant.defaults.colors.dark};"
 >
 	<slot />

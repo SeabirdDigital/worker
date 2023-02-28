@@ -1,31 +1,34 @@
 <script lang="ts">
-	import ContactText from '$lib/components/ContactText.svelte';
 	import Text from '$lib/components/Text.svelte';
 	import siteStore from '$lib/stores/site';
-	import type { KingSite } from '..';
+	import { KingRestaurant } from '..';
+	import type { RestaurantSite } from '../..';
 
-	const site = $siteStore as KingSite;
+	const site = $siteStore as RestaurantSite;
 
 	const images = site.pages.home.images;
 	const globalImages = site.data?.images;
 
 	const links = site.data?.links;
+	const reviews = site.data?.reviews ?? KingRestaurant.defaults.data.reviews;
+	const contact = site.data?.contact ?? KingRestaurant.defaults.data.contact;
+	const openingHours = site.data?.openingHours ?? KingRestaurant.defaults.data.openingHours;
 </script>
 
 <div class="absolute top-0 w-full">
-	<div class="container my-6">
+	<div class="container px-4 my-6">
 		<img class="h-16" src={globalImages?.logo} alt="" />
 	</div>
 </div>
 
 <div
-	class="border-b-8 border-kr-primary bg-cover bg-center bg-black/30 bg-blend-darken"
+	class="border-b-8 border-puffin-primary bg-cover bg-center bg-black/30 bg-blend-darken"
 	style="background-image: url({images.hero});"
 >
 	<div class="container py-48 text-gray-100 flex flex-col gap-8">
 		<div class="flex flex-col gap-4">
 			<h1
-				class="text-3xl md:text-5xl xl:text-6xl text-center md:text-left text-kr-primary font-heading uppercase font-bold"
+				class="text-3xl md:text-5xl xl:text-6xl text-center md:text-left text-puffin-primary font-heading uppercase font-bold"
 			>
 				<Text id="heroHeading" />
 			</h1>
@@ -36,7 +39,7 @@
 		</div>
 
 		<div class="w-full flex flex-col md:flex-row md:items-center gap-6">
-			<button class="bg-kr-primary py-4 px-6">Beställ online</button>
+			<button class="bg-puffin-primary py-4 px-6">Beställ online</button>
 			<button class="">Vår meny</button>
 		</div>
 	</div>
@@ -49,7 +52,7 @@
 		</div>
 
 		<div class="flex flex-col justify-center gap-4 text-center md:text-left">
-			<h2 class="text-4xl text-kr-primary font-heading uppercase font-bold">
+			<h2 class="text-4xl text-puffin-primary font-heading uppercase font-bold">
 				<Text id="aboutHeading" />
 			</h2>
 			<p>
@@ -60,14 +63,14 @@
 
 	<div class="flex flex-col items-center justify-center flex-grow gap-4 py-20">
 		<div class="relative">
-			<h2 class="text-4xl text-kr-primary font-heading uppercase font-bold">
+			<h2 class="text-4xl text-puffin-primary font-heading uppercase font-bold">
 				<Text id="reviewsHeading" />
 			</h2>
 		</div>
 
 		<div class="md:grid grid-cols-3 text-md text-center container text-base" id="reviews">
-			{#if site.data?.reviews}
-				{#each site.data.reviews as review}
+			{#if reviews}
+				{#each reviews as review}
 					<div class="px-8 py-4 flex flex-col gap-4">
 						<p>
 							{@html review.message}
@@ -80,7 +83,7 @@
 	</div>
 </div>
 
-<div class="relative bg-kr-primary">
+<div class="relative bg-puffin-primary">
 	<div class="container md:grid grid-cols-2 gap-16">
 		<div>
 			<img
@@ -100,7 +103,7 @@
 			</div>
 
 			<div class="flex flex-col-reverse md:flex-row gap-3 md:gap-4">
-				<a href={'tel:' + site.data?.contact?.phone?.replace(/\s/g, '')}>
+				<a href={'tel:' + contact?.phone}>
 					<button class="text-white border py-3 px-5 w-fit flex items-center gap-2">
 						<svg width="18" height="18" viewBox="0 0 36 36">
 							<path
@@ -109,12 +112,12 @@
 							/>
 							<path fill="none" d="M0 0h36v36H0z" />
 						</svg>
-						<ContactText type="phone" />
+						{contact?.phone}
 					</button>
 				</a>
 				<a href={links?.['foodora']}>
 					<button
-						class="text-white bg-kr-dark border border-kr-dark py-3 px-5 w-fit flex items-center gap-2 hover:gap-3 duration-150"
+						class="text-white bg-puffin-dark border border-puffin-dark py-3 px-5 w-fit flex items-center gap-2 hover:gap-3 duration-150"
 					>
 						Foodora
 						<svg class="rotate-90" width="18" height="18" viewBox="0 0 36 36">
@@ -131,7 +134,7 @@
 	</div>
 </div>
 
-<footer class="bg-kr-dark text-white">
+<footer class="bg-puffin-dark text-white">
 	<div class="container text-center lg:text-left py-24 grid lg:grid-cols-2 gap-10">
 		<div>
 			<h2 class="font-heading text-3xl mb-2">Kontakt</h2>
@@ -139,22 +142,24 @@
 				<div class="flex flex-col">
 					<h4>Adress:</h4>
 					<a href={links?.map} class="underline hover:no-underline">
-						<ContactText type="address" />
+						{@html contact?.address}
 					</a>
 				</div>
 
 				<div class="flex flex-col">
 					<h4>Telefon:</h4>
-					<a href="tel:042121688" class="underline hover:no-underline"> 042-12 16 88 </a>
+					<a href={'tel:' + contact?.phone} class="underline hover:no-underline">
+						{contact?.phone}
+					</a>
 				</div>
 			</div>
 		</div>
 
 		<div>
-			{#if site.data?.openingHours}
+			{#if openingHours}
 				<h2 class="font-heading text-3xl mb-2">Öppetider</h2>
 				<div class="grid lg:grid-cols-3 gap-2">
-					{#each site.data.openingHours as day}
+					{#each openingHours as day}
 						<div class="flex flex-col">
 							<span>{day.weekday}</span>
 							<span>{day.time}</span>

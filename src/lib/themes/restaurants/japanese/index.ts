@@ -1,10 +1,11 @@
-import type { Theme } from '$lib/themes';
+import { RestaurantDefaults, type RestaurantTheme } from '..';
 import Layout from './Layout.svelte';
 import Home from './pages/home.svelte';
 
-export const JapaneseRestaurant: Theme = {
+export const JapaneseRestaurant: RestaurantTheme = {
 	Layout,
 	pages: {
 		home: Home
-	}
+	},
+	defaults: RestaurantDefaults
 };

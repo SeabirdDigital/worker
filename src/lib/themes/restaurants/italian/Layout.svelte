@@ -1,5 +1,11 @@
-<script>
+<script lang="ts">
+	import siteStore from '$lib/stores/site';
+	import { ItalianRestaurant } from '.';
+	import type { RestaurantSite } from '..';
 	import './ItalianRestaurant.css';
+
+	const site = $siteStore as RestaurantSite;
+	const colors = site.data?.colors;
 </script>
 
 <svelte:head>
@@ -11,6 +17,11 @@
 	/>
 </svelte:head>
 
-<main class="font-nunito">
+<main
+	class="font-nunito"
+	style="--puffin-primary: {colors?.primary ??
+		ItalianRestaurant.defaults.colors.primary}; --puffin-dark: {colors?.dark ??
+		ItalianRestaurant.defaults.colors.dark};"
+>
 	<slot />
 </main>

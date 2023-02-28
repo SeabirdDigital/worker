@@ -1,34 +1,37 @@
 <script lang="ts">
-	import ContactText from '$lib/components/ContactText.svelte';
 	import Text from '$lib/components/Text.svelte';
 	import siteStore from '$lib/stores/site';
-	import type { SepSite } from '..';
-	import Quote from '../components/icons/Quote.svg';
+	import { SepRestaurant } from '..';
+	import type { RestaurantSite } from '../..';
 
-	const site = $siteStore as SepSite;
+	const site = $siteStore as RestaurantSite;
 
 	const images = site.pages.home.images;
 	const globalImages = site.data?.images;
 
 	const links = site.data?.links;
-	const colors = site.data?.colors;
+	const reviews = site.data?.reviews ?? SepRestaurant.defaults.data.reviews;
+	const contact = site.data?.contact ?? SepRestaurant.defaults.data.contact;
+	const openingHours = site.data?.openingHours ?? SepRestaurant.defaults.data.openingHours;
 </script>
 
 <div class="absolute top-0 w-full">
-<div class="container my-6">
-	<img class="h-16" src={globalImages?.logo} alt="">
-</div>
+	<div class="container my-6">
+		<img class="h-16" src={globalImages?.logo} alt="" />
+	</div>
 </div>
 
 <div
-	class="h-screen border-8 border-sr-primary bg-cover bg-center bg-black/50 bg-blend-darken flex justify-center"
+	class="h-screen border-8 border-puffin-primary bg-cover bg-center bg-black/50 bg-blend-darken flex justify-center"
 	style="background-image: url({images.hero});"
 >
 	<div
 		class="h-screen w-3/4 md:w-1/2 max-w-2xl flex flex-col justify-center items-center text-center text-gray-100 gap-8"
 	>
 		<div class="flex flex-col items-center gap-4">
-			<h1 class="text-6xl md:text-7xl xl:text-8xl text-sr-primary font-heading uppercase font-bold">
+			<h1
+				class="text-6xl md:text-7xl xl:text-8xl text-puffin-primary font-heading uppercase font-bold"
+			>
 				<span class="table-caption">
 					{site.siteData.siteName}
 				</span>
@@ -40,20 +43,20 @@
 		</div>
 
 		<div class="w-full flex flex-col md:flex-row justify-between gap-6">
-			<button class="uppercase border-y-2 border-sr-primary px-8 py-3">Beställ online</button>
-			<button class="uppercase border-y-2 border-sr-primary px-8 py-3">Våra menyer</button>
+			<button class="uppercase border-y-2 border-puffin-primary px-8 py-3">Beställ online</button>
+			<button class="uppercase border-y-2 border-puffin-primary px-8 py-3">Våra menyer</button>
 		</div>
 	</div>
 </div>
 
-<div class="bg-sr-dark">
+<div class="bg-puffin-dark">
 	<div class="container flex flex-col-reverse md:grid grid-cols-2 gap-12 py-24">
 		<div class="flex justify-end">
 			<img src={images.about} alt="" />
 		</div>
 
 		<div class="flex flex-col justify-center gap-4 text-center md:text-left">
-			<h2 class="text-4xl text-sr-primary font-heading uppercase font-bold">
+			<h2 class="text-4xl text-puffin-primary font-heading uppercase font-bold">
 				<Text id="aboutHeading" />
 			</h2>
 			<p class="text-gray-100">
@@ -64,27 +67,25 @@
 
 	<div class="flex flex-col items-center justify-center flex-grow gap-4 py-20">
 		<div class="relative">
-			<h2 class="text-4xl text-sr-primary font-heading uppercase font-bold">
+			<h2 class="text-4xl text-puffin-primary font-heading uppercase font-bold">
 				<Text id="reviewsHeading" />
 			</h2>
 		</div>
 
 		<div class="md:grid grid-cols-3 text-md text-center container text-base" id="reviews">
-			{#if site.data?.reviews}
-				{#each site.data.reviews as review}
-					<div class="px-8 py-4 flex flex-col gap-4">
-						<p class="text-gray-100">
-							{@html review.message}
-						</p>
-						<span class="text-gray-100/75 font-bold">{review.author}</span>
-					</div>
-				{/each}
-			{/if}
+			{#each reviews as review}
+				<div class="px-8 py-4 flex flex-col gap-4">
+					<p class="text-gray-100">
+						{@html review.message}
+					</p>
+					<span class="text-gray-100/75 font-bold">{review.author}</span>
+				</div>
+			{/each}
 		</div>
 	</div>
 </div>
 
-<div class="relative bg-sr-primary">
+<div class="relative bg-puffin-primary">
 	<div class="container md:grid grid-cols-2 gap-16">
 		<div>
 			<img
@@ -104,7 +105,7 @@
 			</div>
 
 			<div class="flex flex-col-reverse md:flex-row gap-3 md:gap-4">
-				<a href={'tel:' + site.data?.contact?.phone?.replace(/\s/g, '')}>
+				<a href={'tel:' + contact?.phone?.replace(/\s/g, '')}>
 					<button class="text-white border py-3 px-5 w-fit flex items-center gap-2">
 						<svg width="18" height="18" viewBox="0 0 36 36">
 							<path
@@ -113,12 +114,12 @@
 							/>
 							<path fill="none" d="M0 0h36v36H0z" />
 						</svg>
-						<ContactText type="phone" />
+						{contact?.phone}
 					</button>
 				</a>
 				<a href={links?.['foodora']}>
 					<button
-						class="text-white bg-sr-dark border border-sr-dark py-3 px-5 w-fit flex items-center gap-2 hover:gap-3 duration-150"
+						class="text-white bg-puffin-dark border border-puffin-dark py-3 px-5 w-fit flex items-center gap-2 hover:gap-3 duration-150"
 					>
 						Foodora
 						<svg class="rotate-90" width="18" height="18" viewBox="0 0 36 36">
@@ -135,7 +136,7 @@
 	</div>
 </div>
 
-<footer class="bg-sr-dark text-white">
+<footer class="bg-puffin-dark text-white">
 	<div class="container text-center lg:text-left py-24 grid lg:grid-cols-2 gap-10">
 		<div>
 			<h2 class="font-heading text-3xl mb-2">Kontakt</h2>
@@ -143,29 +144,29 @@
 				<div class="flex flex-col">
 					<h4>Adress:</h4>
 					<a href={links?.map} class="underline hover:no-underline">
-						<ContactText type="address" />
+						{@html contact?.address}
 					</a>
 				</div>
 
 				<div class="flex flex-col">
 					<h4>Telefon:</h4>
-					<a href="tel:042121688" class="underline hover:no-underline"> 042-12 16 88 </a>
+					<a href={'tel:' + contact?.phone} class="underline hover:no-underline">
+						{contact?.phone}
+					</a>
 				</div>
 			</div>
 		</div>
 
 		<div>
-			{#if site.data?.openingHours}
-				<h2 class="font-heading text-3xl mb-2">Öppetider</h2>
-				<div class="grid lg:grid-cols-3 gap-2">
-					{#each site.data.openingHours as day}
-						<div class="flex flex-col">
-							<span>{day.weekday}</span>
-							<span>{day.time}</span>
-						</div>
-					{/each}
-				</div>
-			{/if}
+			<h2 class="font-heading text-3xl mb-2">Öppetider</h2>
+			<div class="grid lg:grid-cols-3 gap-2">
+				{#each openingHours as day}
+					<div class="flex flex-col">
+						<span>{day.weekday}</span>
+						<span>{day.time}</span>
+					</div>
+				{/each}
+			</div>
 		</div>
 	</div>
 
