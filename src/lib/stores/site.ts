@@ -17,29 +17,17 @@ export type Site<
 	Pages = PagesDefault,
 	GlobalImages = DefaultMap,
 	Links = DefaultMap,
-	Colors = DefaultMap
+	Colors = DefaultMap,
+	Data = unknown
 > = {
 	id: string;
 	siteData: SiteData;
 	pages: Pages;
 	data?: {
 		images?: GlobalImages;
-		contact?: {
-			address?: string;
-			phone?: string;
-			email?: string;
-		};
 		links?: Links;
 		colors?: Colors;
-		openingHours?: {
-			weekday: string;
-			time: string;
-		}[];
-		reviews?: {
-			author: string;
-			message: string;
-		}[];
-	};
+	} & Data;
 };
 
 export type SiteData = {
@@ -49,8 +37,8 @@ export type SiteData = {
 	theme: string;
 	ico: string;
 	users: {
-		[uuid: string]: number
-	}
+		[uuid: string]: number;
+	};
 };
 
 const site = writable<Site>();

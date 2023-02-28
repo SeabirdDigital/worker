@@ -1,5 +1,6 @@
 import type { Site } from '$lib/stores/site';
 import type { Theme } from '$lib/themes';
+import type { RestaurantData } from '..';
 import Layout from './Layout.svelte';
 import Home from './pages/home.svelte';
 
@@ -7,8 +8,19 @@ export type KingSite = Site<
 	typeof DefaultPages,
 	typeof DefaultGlobalImages,
 	typeof DefaultLinks,
-	typeof DefaultColors
+	typeof DefaultColors,
+	RestaurantData<typeof DefaultReviews>
 >;
+
+type Review = {
+	author: string;
+	message: string;
+};
+const DefaultReviews: [Review, Review, Review] = [
+	{ message: 'lorem Ipsum', author: 'Britt-Marie' },
+	{ message: 'lorem Ipsum', author: 'Britt-Marie' },
+	{ message: 'lorem Ipsum', author: 'Britt-Marie' }
+];
 
 const DefaultPages = {
 	home: {
