@@ -25,12 +25,12 @@
 	<div class="container py-48 text-gray-100 flex flex-col gap-8">
 		<div class="flex flex-col gap-4">
 			<h1
-				class="text-3xl md:text-6xl text-center md:text-left text-kr-primary font-heading uppercase font-bold"
+				class="text-3xl md:text-5xl xl:text-6xl text-center md:text-left text-kr-primary font-heading uppercase font-bold"
 			>
 				<Text id="heroHeading" />
 			</h1>
 
-			<p class="max-w-xl text-center md:text-left">
+			<p class="max-w-lg xl:max-w-xl text-center md:text-left">
 				<Text id="heroText" />
 			</p>
 		</div>
@@ -44,8 +44,8 @@
 
 <div>
 	<div class="container flex flex-col-reverse md:grid grid-cols-2 gap-12 py-24">
-		<div class="flex justify-end">
-			<img src={images.about} alt="" />
+		<div class="flex justify-end max-h-96">
+			<img class="object-cover" src={images.about} alt="" />
 		</div>
 
 		<div class="flex flex-col justify-center gap-4 text-center md:text-left">

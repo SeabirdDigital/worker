@@ -27,7 +27,7 @@
 </svelte:head>
 
 <div
-	class="font-text relative text-lg"
+	class="font-text relative xl:text-lg"
 	style="--kr-primary: {colors?.primary ?? KingRestaurant.defaults.colors.primary};
 		--kr-dark: {colors?.dark ?? KingRestaurant.defaults.colors.dark};"
 >
