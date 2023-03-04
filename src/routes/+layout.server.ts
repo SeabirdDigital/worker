@@ -3,10 +3,9 @@ import { getImage, getImages } from '$lib/tools/Images';
 import { getFirestore } from 'firebase-admin/firestore';
 import type { LayoutServerLoad } from './$types';
 
-import { error } from '@sveltejs/kit';
-
 export const load: LayoutServerLoad = async (data) => {
-	const host = new URL(data.request.url).host;
+	const url = new URL(data.request.url);
+	const host = url.searchParams.get('host') ?? import.meta.env.VITE_HOST ?? url.host;
 
 	const firestore = getFirestore();
 
@@ -19,7 +18,7 @@ export const load: LayoutServerLoad = async (data) => {
 
 		if (hosts)
 			for (const h of hosts) {
-				if (h == (import.meta.env.VITE_HOST ?? host)) {
+				if (h == host) {
 					currentSite = { ...(site.data() as Site), id: s.id };
 					break;
 				}
@@ -27,11 +26,13 @@ export const load: LayoutServerLoad = async (data) => {
 
 		if (currentSite) break;
 	}
+	console.log(!!currentSite);
 
 	const pathname = data.url.pathname;
 	const pageId = pathname == '/' ? 'home' : pathname.substring(1).replace('portal/edit/', '');
 
-	if (currentSite?.pages[pageId]) {
+	if (currentSite && (pageId == 'home' ? currentSite.pages.home : currentSite.pages[pageId])) {
+		console.log(currentSite?.pages);
 		currentSite.data = {
 			...currentSite.data,
 			images: await getImages(currentSite)
@@ -40,6 +41,7 @@ export const load: LayoutServerLoad = async (data) => {
 
 		currentSite.siteData.ico = await getImage(currentSite, currentSite.siteData.ico);
 
+		console.log('returning');
 		return {
 			currentSite,
 			pageId
@@ -49,4 +51,5 @@ export const load: LayoutServerLoad = async (data) => {
 		return { currentSite };
 	}
 
+	throw Error('Page not found ig ' + pageId);
 };

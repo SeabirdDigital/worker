@@ -21,7 +21,7 @@
 </div>
 
 <div
-	class="border-b-8 border-puffin-primary bg-cover bg-center bg-black/30 bg-blend-darken"
+	class="border-b-8 border-puffin-primary bg-cover bg-center bg-black/40 bg-blend-darken"
 	style="background-image: url({images.hero});"
 >
 	<div class="container py-48 text-gray-100 flex flex-col gap-8">

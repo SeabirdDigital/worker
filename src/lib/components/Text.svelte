@@ -1,12 +1,16 @@
 <script lang="ts">
 	import editMode from '$lib/stores/editMode';
 	import pageId from '$lib/stores/pageId';
-	import site from '$lib/stores/site';
-	import theme from '$lib/stores/theme';
+	import site, { type PagesDefault } from '$lib/stores/site';
+	import { RestaurantDefaults } from '$lib/themes/restaurants';
 
 	export let id: string;
 
-	let text = $site.pages[$pageId][id] ?? $theme.defaults.pages[$pageId][id];
+	const restaurantDefault = (RestaurantDefaults.pages as PagesDefault)[$pageId][id];
+
+	let text =
+		$site.pages[$pageId][id] ??
+		($site.siteData.theme.endsWith('Restaurant') ? restaurantDefault : '');
 </script>
 
 <span class="block" data-puffins-editable={id} contenteditable={$editMode}>
