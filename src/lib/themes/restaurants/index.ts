@@ -52,7 +52,7 @@ const DefaultPages = {
 			order: 'order.jpg'
 		},
 
-		heroHeading: 'Bara den bästa maten, nära till hands',
+		heroHeading: 'Bara den bästa maten,<br>nära till hands',
 		heroText:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit libero modi tempore magnam sit perferendis veniam doloremque ea sequi ipsum impedit voluptatibus, inventore repudiandae vero, dicta nam laudantium quae distinctio.',
 
