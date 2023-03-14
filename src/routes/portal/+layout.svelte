@@ -1,15 +1,8 @@
-<script>
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { auth } from '$lib/firebase';
-	import { onMount } from 'svelte';
-	onMount(() => {
-		if (!$page.url.pathname.startsWith('/portal/auth')) {
-			if (!auth.currentUser) {
-				goto('/portal/auth/login');
-			}
-		}
-	});
-</script>
-
-<slot />
+<div class="flex flex-col">
+	<div class="z-[9999999999999999] h-12 w-full fixed bg-sky-900 text-white flex items-center px-6">
+		Puffins
+	</div>
+	<div class="flex-1 relative mt-12">
+		<slot />
+	</div>
+</div>

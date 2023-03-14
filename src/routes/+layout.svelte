@@ -2,16 +2,17 @@
 	import { page } from '$app/stores';
 	import { auth } from '$lib/firebase';
 	import pageIdStore from '$lib/stores/pageId';
-	import signedIn from '$lib/stores/signedIn';
 	import site, { type Site } from '$lib/stores/site';
 	import theme from '$lib/stores/theme';
 	import themes from '$lib/themes';
+	import { error } from '@sveltejs/kit';
 	import { onAuthStateChanged } from 'firebase/auth';
 	import { onMount } from 'svelte';
 
 	export let data;
-	const pageId: string = data.pageId;
-	const currentSite: Site = data.currentSite;
+	const pageId: string = data.pageId ?? '';
+	const currentSite: Site | undefined = data.currentSite;
+	if (!currentSite) throw error(404, 'Site not found');
 
 	site.set(currentSite);
 	theme.set(
@@ -23,10 +24,6 @@
 	);
 
 	pageIdStore.set(pageId);
-
-	onAuthStateChanged(auth, (user) => {
-		signedIn.set(user != null);
-	});
 </script>
 
 <slot />

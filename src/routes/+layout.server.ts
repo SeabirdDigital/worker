@@ -26,7 +26,6 @@ export const load: LayoutServerLoad = async (data) => {
 
 		if (currentSite) break;
 	}
-	console.log(!!currentSite);
 
 	const pathname = data.url.pathname;
 	const pageId = pathname == '/' ? 'home' : pathname.substring(1).replace('portal/edit/', '');
@@ -41,7 +40,6 @@ export const load: LayoutServerLoad = async (data) => {
 
 		currentSite.siteData.ico = await getImage(currentSite, currentSite.siteData.ico);
 
-		console.log('returning');
 		return {
 			currentSite,
 			pageId
