@@ -11,7 +11,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		const res = new Response();
 		res.headers.append(
 			'Set-Cookie',
-			`session=${sessionCookie};Max-Age=${expiresIn};httpOnly;secure;path=/portal`
+			`session=${sessionCookie};Max-Age=${expiresIn};httpOnly;secure;path=/`
 		);
 
 		return res;

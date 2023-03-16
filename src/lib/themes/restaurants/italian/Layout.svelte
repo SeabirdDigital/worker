@@ -5,7 +5,10 @@
 	import './ItalianRestaurant.css';
 
 	const site = $siteStore as RestaurantSite;
-	const colors = site.data?.colors;
+	let colors = site.data?.colors;
+	siteStore.subscribe((newSite) => {
+		colors = (newSite as RestaurantSite).data?.colors;
+	});
 </script>
 
 <svelte:head>

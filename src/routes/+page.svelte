@@ -17,5 +17,5 @@
 </svelte:head>
 
 <Layout>
-	<Home editMode={false} />
+	<Home />
 </Layout>

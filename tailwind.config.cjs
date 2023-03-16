@@ -3,7 +3,13 @@ module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			colors: {
+				'sb-blue': '#3A405A',
+				'sb-light': '#F9EFE1',
+				'sb-highlight': '#99B2DD'
+			}
+		}
 	},
 	plugins: []
 };
