@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 
 type Notification = {
 	type: 'info' | 'success' | 'warning' | 'error';
@@ -15,3 +15,10 @@ type Button = {
 const notifications = writable<Notification[]>([]);
 
 export default notifications;
+
+notifications.subscribe((n) => {
+	setTimeout(() => {
+		n.shift();
+		notifications.set(n);
+	}, 10000);
+});
