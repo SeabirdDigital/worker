@@ -16,9 +16,12 @@ const notifications = writable<Notification[]>([]);
 
 export default notifications;
 
-notifications.subscribe((n) => {
+export const addNotification = (n: Notification) => {
+	notifications.set([...get(notifications), n]);
+	const nn = get(notifications);
+
 	setTimeout(() => {
-		n.shift();
-		notifications.set(n);
-	}, 10000);
-});
+		nn.shift();
+		notifications.set(nn);
+	}, 5000);
+};

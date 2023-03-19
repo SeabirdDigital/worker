@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ImageWrapper from '$lib/components/ImageWrapper.svelte';
 	import Text from '$lib/components/Text.svelte';
 	import siteStore from '$lib/stores/site';
 	import { RestaurantDefaults, type RestaurantSite } from '../..';
@@ -20,35 +21,39 @@
 	</div>
 </div>
 
-<div
-	class="border-b-8 border-puffin-primary bg-cover bg-center bg-black/40 bg-blend-darken"
-	style="background-image: url({images.hero});"
->
-	<div class="container py-48 text-gray-100 flex flex-col gap-8">
-		<div class="flex flex-col gap-4">
-			<h1
-				class="text-3xl md:text-5xl xl:text-6xl text-center md:text-left text-puffin-primary font-heading uppercase font-bold"
-			>
-				<Text id="heroHeading" />
-			</h1>
+<ImageWrapper id="hero">
+	<div
+		class="border-b-8 border-puffin-primary bg-cover bg-center bg-black/40 bg-blend-darken"
+		style="background-image: url({images.hero});"
+	>
+		<div class="container py-48 text-gray-100 flex flex-col gap-8">
+			<div class="flex flex-col gap-4">
+				<h1
+					class="text-3xl md:text-5xl xl:text-6xl text-center md:text-left text-puffin-primary font-heading uppercase font-bold"
+				>
+					<Text id="heroHeading" />
+				</h1>
 
-			<p class="max-w-lg xl:max-w-xl text-center md:text-left">
-				<Text id="heroText" />
-			</p>
-		</div>
+				<p class="max-w-lg xl:max-w-xl text-center md:text-left">
+					<Text id="heroText" />
+				</p>
+			</div>
 
-		<div class="w-full flex flex-col md:flex-row md:items-center gap-6">
-			<button class="bg-puffin-primary py-4 px-6">Beställ online</button>
-			<button class="">Vår meny</button>
+			<div class="w-full flex flex-col md:flex-row md:items-center gap-6">
+				<button class="bg-puffin-primary py-4 px-6">Beställ online</button>
+				<button class="">Vår meny</button>
+			</div>
 		</div>
 	</div>
-</div>
+</ImageWrapper>
 
 <div>
 	<div class="container flex flex-col-reverse md:grid grid-cols-2 gap-12 py-24">
-		<div class="flex justify-end max-h-96">
-			<img class="object-cover" src={images.about} alt="" />
-		</div>
+		<ImageWrapper id="about">
+			<div class="flex justify-end max-h-96">
+				<img class="object-cover" src={images.about} alt="" />
+			</div>
+		</ImageWrapper>
 
 		<div class="flex flex-col justify-center gap-4 text-center md:text-left">
 			<h2 class="text-4xl text-puffin-primary font-heading uppercase font-bold">
@@ -85,11 +90,14 @@
 <div class="relative bg-puffin-primary">
 	<div class="container md:grid grid-cols-2 gap-16">
 		<div>
-			<img
-				class="hidden md:block absolute left-0 w-1/2 h-full object-cover object-center"
-				src={images.order}
-				alt=""
-			/>
+			<div class="absolute left-0 w-1/2 h-full">
+				<ImageWrapper id="order">
+					<div
+						class="w-full h-full bg-cover bg-center"
+						style="background-image: url({images.order});"
+					/>
+				</ImageWrapper>
+			</div>
 		</div>
 		<div class="flex flex-col gap-6 text-gray-100 py-24">
 			<div>

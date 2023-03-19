@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ImageWrapper from '$lib/components/ImageWrapper.svelte';
 	import Text from '$lib/components/Text.svelte';
 	import siteStore from '$lib/stores/site';
 	import { SepRestaurant } from '..';
@@ -21,38 +22,42 @@
 	</div>
 </div>
 
-<div
-	class="h-screen border-8 border-puffin-primary bg-cover bg-center bg-black/50 bg-blend-darken flex justify-center"
-	style="background-image: url({images.hero});"
->
+<ImageWrapper id="hero">
 	<div
-		class="h-screen w-3/4 md:w-1/2 max-w-2xl flex flex-col justify-center items-center text-center text-gray-100 gap-8"
+		class="h-screen border-8 border-puffin-primary bg-cover bg-center bg-black/50 bg-blend-darken flex justify-center"
+		style="background-image: url({images.hero});"
 	>
-		<div class="flex flex-col items-center gap-4">
-			<h1
-				class="text-6xl md:text-7xl xl:text-8xl text-puffin-primary font-heading uppercase font-bold"
-			>
-				<span class="table-caption">
-					{site.siteData.siteName}
-				</span>
-			</h1>
+		<div
+			class="h-screen w-3/4 md:w-1/2 max-w-2xl flex flex-col justify-center items-center text-center text-gray-100 gap-8"
+		>
+			<div class="flex flex-col items-center gap-4">
+				<h1
+					class="text-6xl md:text-7xl xl:text-8xl text-puffin-primary font-heading uppercase font-bold"
+				>
+					<span class="table-caption">
+						{site.siteData.siteName}
+					</span>
+				</h1>
 
-			<p class="md:w-3/4">
-				<Text id="heroText" />
-			</p>
-		</div>
+				<p class="md:w-3/4">
+					<Text id="heroText" />
+				</p>
+			</div>
 
-		<div class="w-full flex flex-col md:flex-row justify-between gap-6">
-			<button class="uppercase border-y-2 border-puffin-primary px-8 py-3">Beställ online</button>
-			<button class="uppercase border-y-2 border-puffin-primary px-8 py-3">Våra menyer</button>
+			<div class="w-full flex flex-col md:flex-row justify-between gap-6">
+				<button class="uppercase border-y-2 border-puffin-primary px-8 py-3">Beställ online</button>
+				<button class="uppercase border-y-2 border-puffin-primary px-8 py-3">Våra menyer</button>
+			</div>
 		</div>
 	</div>
-</div>
+</ImageWrapper>
 
 <div class="bg-puffin-dark">
 	<div class="container flex flex-col-reverse md:grid grid-cols-2 gap-12 py-24">
 		<div class="flex justify-end">
-			<img src={images.about} alt="" />
+			<ImageWrapper id="about">
+				<img src={images.about} alt="" />
+			</ImageWrapper>
 		</div>
 
 		<div class="flex flex-col justify-center gap-4 text-center md:text-left">
@@ -88,11 +93,14 @@
 <div class="relative bg-puffin-primary">
 	<div class="container md:grid grid-cols-2 gap-16">
 		<div>
-			<img
-				class="hidden md:block absolute left-0 w-1/2 h-full object-cover object-center"
-				src={images.order}
-				alt=""
-			/>
+			<div class="absolute left-0 w-1/2 h-full">
+				<ImageWrapper id="order">
+					<div
+						class="w-full h-full bg-cover bg-center"
+						style="background-image: url({images.order});"
+					/>
+				</ImageWrapper>
+			</div>
 		</div>
 		<div class="flex flex-col gap-6 text-gray-100 py-24">
 			<div>

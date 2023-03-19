@@ -3,6 +3,7 @@
 
 	import Text from '$lib/components/Text.svelte';
 
+	import ImageWrapper from '$lib/components/ImageWrapper.svelte';
 	import pageId from '$lib/stores/pageId';
 	import siteStore from '$lib/stores/site';
 	import { JapaneseRestaurant } from '..';
@@ -35,10 +36,14 @@
 </header>
 
 <div class="relative flex flex-col-reverse md:flex-col">
-	<div
-		class="md:absolute h-[40vh] md:h-full md:w-1/2 left-1/2 bg-cover bg-center bg-fixed md:bg-scroll"
-		style="background-image: url({images?.hero});"
-	/>
+	<div class="md:absolute h-[40vh] md:h-full md:w-1/2 left-1/2">
+		<ImageWrapper id="hero">
+			<div
+				class="h-full w-full bg-cover bg-center bg-fixed md:bg-scroll"
+				style="background-image: url({images?.hero});"
+			/>
+		</ImageWrapper>
+	</div>
 	<div class="container py-36">
 		<div class="flex flex-col gap-2 md:w-1/2">
 			<h1 class="font-medium uppercase text-4xl">
@@ -70,7 +75,12 @@
 	</p>
 </div>
 
-<div class="bg-cover bg-center bg-fixed h-[40vh]" style="background-image: url({images?.about});" />
+<ImageWrapper id="about">
+	<div
+		class="bg-cover bg-center bg-fixed h-[40vh]"
+		style="background-image: url({images?.about});"
+	/>
+</ImageWrapper>
 
 <div class="flex">
 	<div class="flex flex-col items-center justify-center flex-grow gap-8 py-24">

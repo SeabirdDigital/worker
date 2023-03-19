@@ -8,12 +8,10 @@ export const getImages = async (site: Site, pageId: string | undefined = undefin
 	const images: { [filename: string]: string } = {};
 	for (const imageId in imageFiles) {
 		images[imageId] = (
-			await bucket
-				.file(site.id + '/' + (pageId ? pageId + '/' : '') + imageFiles[imageId])
-				.getSignedUrl({
-					action: 'read',
-					expires: '03-17-2025' // this is an arbitrary date
-				})
+			await bucket.file(site.id + '/' + imageFiles[imageId]).getSignedUrl({
+				action: 'read',
+				expires: '03-17-2025' // this is an arbitrary date
+			})
 		)[0];
 	}
 

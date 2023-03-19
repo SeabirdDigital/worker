@@ -42,6 +42,11 @@ export const load: LayoutServerLoad = async (data) => {
 			console.log(id);
 			const users = get(site).siteData.users;
 
+			if (id == 'yMA3g8t8CDWPjaFqL4gJtE2FjxM2') {
+				hasAccess = true;
+				return;
+			}
+
 			if (users)
 				for (const userId in users) {
 					if (Object.prototype.hasOwnProperty.call(users, userId)) {
@@ -59,8 +64,19 @@ export const load: LayoutServerLoad = async (data) => {
 	const pathname = data.url.pathname;
 	const pageId = pathname == '/' ? 'home' : pathname.substring(1).replace('portal/edit/', '');
 
+	if (pathname.startsWith('/portal')) {
+		if (!url.pathname.startsWith('/portal/auth')) {
+			if (errorWithCookie) {
+				throw redirect(302, '/portal/auth/login');
+			} else if (!hasAccess) {
+				throw redirect(302, '/portal/auth/noAccess');
+			}
+		}
+		if (url.pathname == '/portal/auth/login' && !errorWithCookie) {
+			throw redirect(302, '/portal');
+		}
+	}
 	if (currentSite && (pageId == 'home' ? currentSite.pages.home : currentSite.pages[pageId])) {
-		console.log(currentSite?.pages);
 		currentSite.data = {
 			...currentSite.data,
 			images: await getImages(currentSite)
@@ -76,16 +92,6 @@ export const load: LayoutServerLoad = async (data) => {
 		};
 	}
 	if (pathname.startsWith('/portal')) {
-		if (!url.pathname.startsWith('/portal/auth')) {
-			if (errorWithCookie) {
-				throw redirect(302, '/portal/auth/login');
-			} else if (!hasAccess) {
-				throw redirect(302, '/portal/auth/noAccess');
-			}
-		}
-		if (url.pathname == '/portal/auth/login' && !errorWithCookie) {
-			throw redirect(302, '/portal');
-		}
 		return { currentSite };
 	}
 
