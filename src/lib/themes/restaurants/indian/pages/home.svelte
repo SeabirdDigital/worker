@@ -95,7 +95,10 @@
 				>
 					Beställ online
 				</a>
-				<a href="tel:042121688" class="text-white border py-3 px-5 w-fit flex items-center gap-2">
+				<a
+					href={'tel:' + contact?.phone?.replace(/\s/g, '')}
+					class="text-white border py-3 px-5 w-fit flex items-center gap-2"
+				>
 					<svg width="18" height="18" viewBox="0 0 36 36">
 						<path
 							fill="currentColor"
