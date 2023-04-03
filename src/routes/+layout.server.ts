@@ -2,7 +2,7 @@ import type { Site } from '$lib/stores/site';
 import site from '$lib/stores/site';
 import { getImage, getImages } from '$lib/tools/Images';
 import { redirect } from '@sveltejs/kit';
-import { auth } from 'firebase-admin';
+import admin from 'firebase-admin';
 import { getFirestore } from 'firebase-admin/firestore';
 import { get } from 'svelte/store';
 import type { LayoutServerLoad } from './$types';
@@ -35,7 +35,8 @@ export const load: LayoutServerLoad = async (data) => {
 
 	let hasAccess = false;
 	let errorWithCookie = false;
-	await auth()
+	await admin
+		.auth()
 		.verifySessionCookie(sessionCookie, true)
 		.then((claims) => {
 			const id = claims.uid;
