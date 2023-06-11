@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1686441743904,
+      "tag": "0000_real_mandarin",
+      "breakpoints": false
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1686466492472,
+      "tag": "0001_steep_venom",
+      "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1686466557043,
+      "tag": "0002_keen_jack_flag",
+      "breakpoints": false
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `p_hosts` RENAME COLUMN `id` TO `siteId`;
