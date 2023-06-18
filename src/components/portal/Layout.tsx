@@ -7,6 +7,7 @@ import {
 	type GeistUIThemes,
 } from "@geist-ui/core";
 import { createContext, useEffect, useState, type ReactNode } from "react";
+import { env } from "~/env.mjs";
 import Header from "./Header";
 
 type PuffinsContextType = {
@@ -21,7 +22,7 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
 	useEffect(() => {
-		const host = process.env.VERCEL_URL ?? process.env.DEV_HOST;
+		const host = process.env.VERCEL_URL ?? env.NEXT_PUBLIC_DEV_HOST;
 
 		if (host !== "puffins.se")
 			window.location.href = "https://puffins.se/portal";
