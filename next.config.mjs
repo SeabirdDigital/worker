@@ -18,5 +18,9 @@ const config = {
 		locales: ["en"],
 		defaultLocale: "en",
 	},
+
+	env: {
+		DEV_HOST: process.env.DEV_HOST ?? "",
+	},
 };
 export default config;

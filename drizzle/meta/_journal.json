@@ -29,6 +29,34 @@
       "when": 1686487579947,
       "tag": "0003_next_moira_mactaggert",
       "breakpoints": false
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1686732737978,
+      "tag": "0004_tranquil_lyja",
+      "breakpoints": false
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1686732905853,
+      "tag": "0005_cultured_reptil",
+      "breakpoints": false
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1686733096851,
+      "tag": "0006_daily_gateway",
+      "breakpoints": false
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1686734105319,
+      "tag": "0007_past_rogue",
+      "breakpoints": false
     }
   ]
 }
