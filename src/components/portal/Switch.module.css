@@ -1,0 +1,55 @@
+#UserSwitch {
+	display: flex;
+	align-items: center;
+
+	& .toggle {
+		position: relative;
+		padding: 0.5rem;
+		margin-left: 0.5rem;
+		border-radius: 0.5rem;
+		border: 2px solid transparent;
+
+		&.toggle:has(.checkbox:checked) {
+			background-color: var(--accents-2);
+		}
+		&.toggle:hover:not(:has(.menu:hover)) {
+			cursor: pointer;
+			background-color: var(--accents-2);
+			border-color: var(--accents-3);
+		}
+
+		& .checkbox {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		&:has(.checkbox:checked) .menu {
+			display: flex;
+		}
+
+		& .menu {
+			display: none;
+			position: absolute;
+			top: calc(100% + 0.5rem);
+			left: 50%;
+			transform: translateX(-50%);
+			width: 12rem;
+			padding: 0.25rem;
+			border: 1px solid var(--accents-3);
+			border-radius: 0.25rem;
+			background-color: var(--geist-background);
+
+			& .site {
+				width: 100%;
+				padding: 0.5rem;
+				border-radius: 0.25rem;
+
+				&.site:hover {
+					cursor: pointer;
+					background-color: var(--accents-2);
+				}
+			}
+		}
+	}
+}

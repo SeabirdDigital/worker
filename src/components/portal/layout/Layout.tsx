@@ -1,20 +1,17 @@
 import { ClerkProvider } from "@clerk/nextjs";
-import {
-	CssBaseline,
-	GeistProvider,
-	Page,
-	useTheme,
-	type GeistUIThemes,
-} from "@geist-ui/core";
 import { createContext, useEffect, useState, type ReactNode } from "react";
 import { env } from "~/env.mjs";
 import Header from "./Header";
 
 type PuffinsContextType = {
-	theme?: GeistUIThemes;
+	theme: "light" | "dark";
 };
 
-export const PuffinsContext = createContext<PuffinsContextType>({});
+const defaultContext: PuffinsContextType = {
+	theme: "dark",
+};
+
+export const PuffinsContext = createContext<PuffinsContextType>(defaultContext);
 
 type LayoutProps = {
 	children: ReactNode;
@@ -28,24 +25,27 @@ const Layout = ({ children }: LayoutProps) => {
 			window.location.href = "https://puffins.se/portal";
 	});
 
-	const [themeType, setThemeType] = useState("dark");
+	const [puffins, setPuffins] = useState<PuffinsContextType>(defaultContext);
 	const switchThemes = () => {
-		setThemeType((last) => (last === "dark" ? "light" : "dark"));
-	};
+		setPuffins((last) => {
+			const newPuffins: PuffinsContextType = {
+				...last,
+				theme: last.theme === "dark" ? "light" : "dark",
+			};
 
-	const theme = useTheme();
-	const [puffins, setPuffins] = useState<PuffinsContextType>({ theme });
+			document
+				.querySelector("html")
+				?.setAttribute("data-theme", newPuffins.theme);
+
+			return newPuffins;
+		});
+	};
 
 	return (
 		<PuffinsContext.Provider value={puffins}>
 			<ClerkProvider>
-				<GeistProvider themeType={themeType}>
-					<CssBaseline />
-					<Page>
-						<Header switchThemes={switchThemes} />
-						<Page.Content>{children}</Page.Content>
-					</Page>
-				</GeistProvider>
+				<Header switchThemes={switchThemes} />
+				{children}
 			</ClerkProvider>
 		</PuffinsContext.Provider>
 	);

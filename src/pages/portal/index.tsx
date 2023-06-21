@@ -1,16 +1,8 @@
 import { type NextPage } from "next";
 import Link from "next/link";
-import Layout from "~/components/portal/Layout";
+import Layout from "~/components/portal/layout/Layout";
+import { type Site } from "~/server/api/routers/sites";
 import { api } from "~/utils/api";
-
-type Site = {
-	id: string;
-	name: string;
-	tagline: string;
-	ico: string;
-	logo: string;
-	hosts: { siteId: string; host: string }[];
-};
 
 const Overview: NextPage = () => {
 	const sitesQuery = api.sites.get.useQuery({ id: null });
@@ -33,7 +25,7 @@ const Overview: NextPage = () => {
 					{sites?.map((site) => (
 						<div
 							key={`site-${site.id}`}
-							className="flex items-center justify-between rounded-lg border border-neutral-700 bg-black p-4"
+							className="flex items-center justify-between rounded-lg border border-[var(--accents-3)] p-4"
 						>
 							<div>
 								<h4>{site.name}</h4>

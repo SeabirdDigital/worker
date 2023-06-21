@@ -1,5 +1,4 @@
 import { useState, type FormEventHandler } from "react";
-import { sites } from "~/db/sites";
 import { api } from "~/utils/api";
 
 const NewSite = () => {

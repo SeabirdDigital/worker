@@ -4,6 +4,15 @@ import { colors, hosts, restaurantData, sites } from "~/db/sites";
 import db from "~/utils/db";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
+export type Site = {
+	id: string;
+	name: string;
+	tagline: string;
+	ico: string;
+	logo: string;
+	hosts: { siteId: string; host: string }[];
+};
+
 export const sitesRouter = createTRPCRouter({
 	get: publicProcedure
 		.input(z.object({ id: z.string().nullable() }))

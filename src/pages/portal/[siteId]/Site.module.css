@@ -1,0 +1,14 @@
+div:has(> .title) {
+	border-bottom: 1px solid var(--accents-2);
+
+	& .title {
+		@apply container;
+
+		padding: 3rem 0;
+
+		&.title h1 {
+			font-size: 2rem;
+			margin: 0;
+		}
+	}
+}
