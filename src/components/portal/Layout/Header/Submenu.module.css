@@ -1,0 +1,25 @@
+.submenu {
+	display: flex;
+	gap: 0.5rem;
+
+	& .option {
+		position: relative;
+		padding: 0.25rem 0.75rem;
+		border-radius: 0.25rem;
+		margin-bottom: 0.5rem;
+
+		&.option:hover {
+			background-color: var(--accents-2);
+		}
+
+		&.selected::after {
+			content: " ";
+			position: absolute;
+			bottom: -0.5rem;
+			right: 0.75rem;
+			width: calc(100% - 1.5rem);
+			height: 2px;
+			background-color: var(--geist-foreground);
+		}
+	}
+}

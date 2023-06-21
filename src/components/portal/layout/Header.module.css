@@ -1,30 +1,33 @@
 *:has(> #header) {
 	border-bottom: 1px solid var(--accents-2);
-}
 
-#header {
-	@apply container;
+	& #header {
+		@apply container;
 
-	padding: 1rem 0;
-	display: flex;
-	justify-content: space-between;
-}
+		& .portalNav {
+			height: 5rem;
+			padding: 1rem 0;
+			display: flex;
+			justify-content: space-between;
 
-#logo {
-	display: block;
-	height: 1.5rem;
-	width: 1.5rem;
-	background-color: var(--geist-foreground);
-}
+			& #logo {
+				display: block;
+				height: 1.5rem;
+				width: 1.5rem;
+				background-color: var(--geist-foreground);
+			}
 
-.breadcrumbs {
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-}
+			& .breadcrumbs {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+			}
 
-.breadcrumbs > * + *::before {
-	content: "/";
-	margin-right: 1rem;
-	color: var(--accents-4);
+			& .breadcrumbs > * + *::before {
+				content: "/";
+				margin-right: 1rem;
+				color: var(--accents-4);
+			}
+		}
+	}
 }
