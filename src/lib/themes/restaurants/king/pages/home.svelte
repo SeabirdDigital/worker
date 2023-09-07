@@ -90,7 +90,7 @@
 <div class="relative bg-puffin-primary">
 	<div class="container md:grid grid-cols-2 gap-16">
 		<div>
-			<div class="absolute left-0 w-1/2 h-full">
+			<div class="hidden md:block absolute left-0 w-1/2 h-full">
 				<ImageWrapper id="order">
 					<div
 						class="w-full h-full bg-cover bg-center"
